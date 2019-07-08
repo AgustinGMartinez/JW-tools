@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"android": "cd android && gradlew app:assembleDebug && gradlew installDebug && cd ../ && react-native run-android "
+		"android": "cd android && gradlew app:assembleDebug && gradlew installDebug && cd ../ && react-native run-android ",
+		"test": "jest \"./nwt\""
 	},
 	"dependencies": {
 		"react": "16.8.3",
@@ -23,6 +24,7 @@
 		"babel-plugin-root-import": "^6.2.0",
 		"jest": "^24.8.0",
 		"metro-react-native-babel-preset": "^0.54.1",
+		"node-fetch": "^2.6.0",
 		"react-test-renderer": "16.8.3",
 		"redux-logger": "^3.0.6"
 	},

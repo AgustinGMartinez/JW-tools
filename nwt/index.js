@@ -1,29 +1,20 @@
 const fs = require('fs');
 const path = require('path');
+const cleanText = require('./utils').cleanText;
+const cleanTextAndVerseNumber = require('./utils').cleanTextAndVerseNumber;
+const booksToNumbers = require('./utils').booksToNumbers;
+// const isFile = require('./utils').isFile;
 
 const booksPath = __dirname;
 
 const bible = new Map();
 
-const cleanText = text =>
-	text
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.replace(/([^\w\d])/g, '')
-		.replace();
-
-const cleanTextAndVerseNumber = text =>
-	text
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.replace(/(\d+\s{2}|\d\t)/g, '')
-		.replace(/([^\w\d])/g, '')
-		.replace();
-
+// initialize the bible Map
 fs.readdirSync(booksPath).forEach(function(bookFolderName, idx) {
-	if (bookFolderName === 'index.js') return; // ignore this very file
+	if (['index.js', 'utils.js', 'bible.test.js'].includes(bookFolderName))
+		return; // ignore this very file
 	const bookPath = path.resolve(booksPath, bookFolderName);
-	fs.readdirSync(bookPath).forEach(function(chapterFolderName, index) {
+	fs.readdirSync(bookPath).forEach(function(chapterFolderName) {
 		let content = require(path.resolve(bookPath, chapterFolderName));
 
 		const entries = Object.entries(content).map(entry => [
@@ -54,13 +45,21 @@ fs.readdirSync(booksPath).forEach(function(bookFolderName, idx) {
 	});
 });
 
-bible.search = function(phrase) {
+bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 	console.time('search');
 	if (phrase.trim() === '') return [];
 	const found = [];
+	const foundPriority2 = []; // if found with unmatched order in 1 verse
+	const foundPriority3 = []; // if found with unmatched order in 2 verses
+	const getFoundCount = () =>
+		found.length + foundPriority2.length + foundPriority3.length;
+	let breakAll = false;
+	books = books && booksToNumbers(books, abbreviations);
 	// iterate the books
 	for (let i = 1; i <= this.size; i++) {
 		let currentBook = this.get(i);
+		//apply book filters
+		if (books && !(books.indexOf(i) > -1)) continue;
 		// iterate the chapthers of the book
 		for (let j = 1; j <= currentBook.size; j++) {
 			let currentChapter = currentBook.get(j);
@@ -73,11 +72,12 @@ bible.search = function(phrase) {
 			for (let k = 1; k <= currentChapter.size; k++) {
 				let content = currentChapter.get(k);
 
-				// look match on this verse
+				// look match on this verse, with order
 				let cleanContent = cleanTextAndVerseNumber(content);
 				phrase = cleanText(phrase);
 				let regex = new RegExp(phrase, 'gi');
 				let matches = regex.test(cleanContent);
+
 				if (matches) {
 					found.push({
 						value: content,
@@ -86,6 +86,7 @@ bible.search = function(phrase) {
 					});
 				} else {
 					// look match on the previous verse and this one concatenated
+					// with order
 					let conc = cleanTextAndVerseNumber(
 						previousVerse.clean + cleanContent
 					);
@@ -96,8 +97,40 @@ bible.search = function(phrase) {
 							readble: bookNames[i - 1] + ' ' + j + ':' + (k - 1) + ', ' + k,
 							map: i + '-' + j + '-' + (k - 1) + ':' + k,
 						});
+					} else {
+						// check match without keeping order (in 1 verse)
+						let regexs = phrase
+							.trim()
+							.split(' ')
+							.map(w => new RegExp('\\b' + cleanText(w) + '\\b', 'gi'));
+						matches = regexs.every(regex => regex.test(cleanContent));
+
+						if (matches) {
+							foundPriority2.push({
+								value: content,
+								readble: bookNames[i - 1] + ' ' + j + ':' + k,
+								map: i + '-' + j + '-' + k,
+							});
+						} else {
+							// look match on the previous verse and this one concatenated
+							// without order
+							let conc = cleanTextAndVerseNumber(
+								previousVerse.clean + cleanContent
+							);
+							matches = regexs.every(regex => regex.test(conc));
+
+							if (matches) {
+								foundPriority3.push({
+									value: previousVerse.regular + content,
+									readble:
+										bookNames[i - 1] + ' ' + j + ':' + (k - 1) + ', ' + k,
+									map: i + '-' + j + '-' + (k - 1) + ':' + k,
+								});
+							}
+						}
 					}
 				}
+
 				// reset so we don't get duplicates
 				if (matches) {
 					previousVerse.clean = '';
@@ -107,12 +140,19 @@ bible.search = function(phrase) {
 					previousVerse.clean = cleanContent;
 					previousVerse.regular = content;
 				}
-				if (found.length >= 100) return found;
+				// no sirve por el tema de las prioridades
+				// if (getFoundCount() >= MAX_RESULTS) breakAll = true;
+				// if (breakAll) break;
 			}
+			// if (breakAll) break;
 		}
+		// if (breakAll) break;
 	}
 	console.timeEnd('search');
-	return found;
+	return found
+		.concat(foundPriority2)
+		.concat(foundPriority3)
+		.slice(0, MAX_RESULTS);
 };
 
 const abbreviations = [
@@ -263,7 +303,7 @@ exports.getBook = function(numberOrAbbr) {
 
 exports.search = bible.search.bind(bible);
 
-console.log(exports.search('jehova a mi señor'));
+// console.log(exports.search('jehova dijo a mi señor', undefined, 5));
 // console.log(
 // 	exports
 // 		.getBook(27)
