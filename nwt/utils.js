@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 exports.cleanText = text =>
 	text
 		.normalize('NFD')
@@ -16,18 +14,15 @@ exports.cleanTextAndVerseNumber = text =>
 		.replace();
 
 exports.booksToNumbers = (books, abbreviations) => {
-	books = books.map(book => {
-		if (typeof book === 'number') {
-			return book;
-		} else {
-			const toNumber = abbreviations.indexOf(book) + 1;
-			if (toNumber) return toNumber;
-			else return null;
-		}
-	});
-	return books.filter(Boolean);
+	return books
+		.map(book => {
+			if (typeof book === 'number') {
+				return book;
+			} else {
+				const toNumber = abbreviations.indexOf(book) + 1;
+				if (toNumber) return toNumber;
+				else return null;
+			}
+		})
+		.filter(Boolean);
 };
-
-// exports.isFile = fileName => {
-// 	return fs.lstatSync(fileName).isFile();
-// };

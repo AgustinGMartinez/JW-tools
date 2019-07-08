@@ -15,20 +15,11 @@ const withRedux = Component => props => {
 };
 
 export function registerScreens() {
-	Navigation.registerComponent('pruebarn.Auth', () =>
-		withRedux(require('./Auth/Auth').default)
-	);
-	Navigation.registerComponent('pruebarn.SideDrawer', () =>
+	Navigation.registerComponent('jw-tools.SideDrawer', () =>
 		withRedux(require('./SideDrawer/SideDrawer').default)
 	);
-	Navigation.registerComponent('pruebarn.FindPlace', () =>
-		withRedux(require('./FindPlace/FindPlace').default)
-	);
-	Navigation.registerComponent('pruebarn.SharePlace', () =>
-		withRedux(require('./SharePlace/SharePlace').default)
-	);
-	Navigation.registerComponent('pruebarn.PlaceDetail', () =>
-		withRedux(require('./PlaceDetail/PlaceDetail').default)
+	Navigation.registerComponent('jw-tools.Search', () =>
+		withRedux(require('./Search/Search').default)
 	);
 }
 
@@ -36,97 +27,44 @@ export function initTabBasedNavigation() {
 	Promise.all([
 		Icon.getImageSource('md-map', 30),
 		Icon.getImageSource('ios-share-alt', 30),
-		Icon.getImageSource('ios-menu', 30)
+		Icon.getImageSource('ios-menu', 30),
 	]).then(([icon1, icon2, icon3]) => {
 		Navigation.setRoot({
 			root: {
 				sideMenu: {
 					left: {
 						component: {
-							name: 'pruebarn.SideDrawer',
-							id: 'drawerMenu'
-						}
+							name: 'jw-tools.SideDrawer',
+							id: 'drawerMenu',
+						},
 					},
 					center: {
-						// tabs
-						bottomTabs: {
+						stack: {
+							// stacks, the last one is the current page for this stack
 							children: [
-								// each child here, can be a stack, a new tab navigation, or a single component
-								// the first child is the current selected
 								{
-									// stack navigation on this tab
-									stack: {
-										// stacks, the last one is the current page for this stack
-										children: [
-											{
-												component: {
-													name: 'pruebarn.FindPlace',
-													options: {
-														topBar: {
-															title: {
-																text:
-																	'Find a Place'
-															},
-															leftButtons: [
-																{
-																	id:
-																		'sideMenuButton',
-																	icon: icon3
-																}
-															]
-														}
-													}
-												}
-											}
-										],
-										// tab options such as text and icon
+									component: {
+										name: 'jw-tools.Search',
 										options: {
-											bottomTab: {
-												text: 'Find Place',
-												icon: icon1
-											}
-										}
-									}
+											topBar: {
+												title: {
+													text: 'Inicio',
+												},
+												leftButtons: [
+													{
+														id: 'sideMenuButton',
+														icon: icon3,
+													},
+												],
+											},
+										},
+									},
 								},
-								{
-									stack: {
-										// stacks, the last one is the current page for this stack
-										children: [
-											{
-												component: {
-													name: 'pruebarn.SharePlace',
-													options: {
-														topBar: {
-															title: {
-																text:
-																	'Share a Place'
-															},
-															leftButtons: [
-																{
-																	id:
-																		'sideMenuButton',
-																	icon: icon3
-																}
-															]
-														}
-													}
-												}
-											}
-										],
-										// tab options such as text and icon
-										options: {
-											bottomTab: {
-												text: 'Share Place',
-												icon: icon2
-											}
-										}
-									}
-								}
-							]
-						}
-					}
-				}
-			}
+							],
+						},
+					},
+				},
+			},
 		});
 	});
 }

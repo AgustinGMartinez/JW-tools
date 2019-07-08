@@ -1,21 +1,13 @@
-const fs = require('fs');
-const path = require('path');
 const cleanText = require('./utils').cleanText;
 const cleanTextAndVerseNumber = require('./utils').cleanTextAndVerseNumber;
 const booksToNumbers = require('./utils').booksToNumbers;
-// const isFile = require('./utils').isFile;
-
-const booksPath = __dirname;
-
+const all = require('./all');
 const bible = new Map();
 
 // initialize the bible Map
-fs.readdirSync(booksPath).forEach(function(bookFolderName, idx) {
-	if (['index.js', 'utils.js', 'bible.test.js'].includes(bookFolderName))
-		return; // ignore this very file
-	const bookPath = path.resolve(booksPath, bookFolderName);
-	fs.readdirSync(bookPath).forEach(function(chapterFolderName) {
-		let content = require(path.resolve(bookPath, chapterFolderName));
+Object.keys(all).forEach(function(bookNumber) {
+	Object.keys(all[bookNumber]).forEach(function(chapterNumber) {
+		let content = all[bookNumber][chapterNumber];
 
 		const entries = Object.entries(content).map(entry => [
 			Number(entry[0]),
@@ -34,19 +26,21 @@ fs.readdirSync(booksPath).forEach(function(bookFolderName, idx) {
 			return result;
 		};
 
-		if (!(bible.get(Number(bookFolderName)) instanceof Map)) {
-			bible.set(Number(bookFolderName), new Map());
+		if (!(bible.get(Number(bookNumber)) instanceof Map)) {
+			bible.set(Number(bookNumber), new Map());
 		}
-		const book = bible.get(Number(bookFolderName));
+		const book = bible.get(Number(bookNumber));
 
-		book.set(Number(chapterFolderName.replace(/.json/g, '')), content);
+		book.set(Number(chapterNumber.replace(/.json/g, '')), content);
 
-		bible.set(Number(bookFolderName), book);
+		bible.set(Number(bookNumber), book);
 	});
 });
 
 bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
-	console.time('search');
+	// console.time('search');
+	console.log(phrase);
+	console.log(typeof phrase);
 	if (phrase.trim() === '') return [];
 	const found = [];
 	const foundPriority2 = []; // if found with unmatched order in 1 verse
@@ -148,7 +142,7 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 		}
 		// if (breakAll) break;
 	}
-	console.timeEnd('search');
+	// console.timeEnd('search');
 	return found
 		.concat(foundPriority2)
 		.concat(foundPriority3)

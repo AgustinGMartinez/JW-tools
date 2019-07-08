@@ -6,7 +6,7 @@ import places from './reducers/places';
 const reducers = combineReducers({ places });
 
 const composeEnhancers = __DEV__
-	? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+	? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 	: false || compose;
 
 const configureStore = () => {
