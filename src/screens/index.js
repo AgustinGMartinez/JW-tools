@@ -21,6 +21,9 @@ export function registerScreens() {
 	Navigation.registerComponent('jw-tools.Search', () =>
 		withRedux(require('./Search/Search').default)
 	);
+	Navigation.registerComponent('jw-tools.BibleView', () =>
+		withRedux(require('./Bible/Bible').default)
+	);
 }
 
 export function initTabBasedNavigation() {
@@ -49,13 +52,18 @@ export function initTabBasedNavigation() {
 											topBar: {
 												title: {
 													text: 'Inicio',
+													color: 'white',
 												},
 												leftButtons: [
 													{
 														id: 'sideMenuButton',
 														icon: icon3,
+														color: 'white',
 													},
 												],
+												background: {
+													color: '#5B3C88',
+												},
 											},
 										},
 									},

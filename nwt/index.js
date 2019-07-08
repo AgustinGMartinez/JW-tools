@@ -39,8 +39,6 @@ Object.keys(all).forEach(function(bookNumber) {
 
 bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 	// console.time('search');
-	console.log(phrase);
-	console.log(typeof phrase);
 	if (phrase.trim() === '') return [];
 	const found = [];
 	const foundPriority2 = []; // if found with unmatched order in 1 verse

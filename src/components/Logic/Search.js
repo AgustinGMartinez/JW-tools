@@ -1,5 +1,5 @@
 import React from 'react';
-import '~/utils/bible';
+import { search } from '~/utils/bible';
 
 class SearchProvider extends React.PureComponent {
 	state = {};
