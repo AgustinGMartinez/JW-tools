@@ -47,4 +47,14 @@ public class MainApplication extends NavigationApplication {
     public List<ReactPackage> createAdditionalReactPackages() {
         return getPackages();
     }
+
+    @Override
+    protected ReactNativeHost createReactNativeHost() {
+        return new NavigationReactNativeHost(this) {
+            @Override
+            protected String getJSMainModuleName() {
+            return "index";
+            }
+        };
+    }
 }
