@@ -2,11 +2,10 @@
 
 ## Currently known bugs:
 
-- la busqueda "jah" estpa tirando cualquier cosa, parece no usar word baundary
+- la busqueda "jah" estaa tirando cualquier cosa, parece no usar word baundary
 
 ## Upcoming features:
 
-- fondo de imagen de libro que se vea solo cuando no hay items, y con altura adaptable, no fija
 - formato mas lindo en lectura de biblia
 - lectura de biblia scrollea y resalta texto abierto
 - icono, nombre y splash screen
@@ -14,3 +13,4 @@
 - agregar property de cuantos caps tiene el libro para los libros
 - cantidad de resultados / tantos (en busqueda)
 - agregar ajustes para cambiar tamaño de letra
+- agregar filtros a la busqueda (front end)

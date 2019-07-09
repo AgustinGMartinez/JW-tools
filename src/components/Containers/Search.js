@@ -10,9 +10,13 @@ class SearchBarContainer extends React.PureComponent {
 	state = {
 		searchResults: [],
 	};
+	currentSearchTimeout = null;
 
 	onSearch = value => {
-		this.setState({ searchResults: bible.search(value) });
+		clearTimeout(this.currentSearchTimeout);
+		this.currentSearchTimeout = setTimeout(() => {
+			this.setState({ searchResults: bible.search(value) });
+		}, 1000);
 	};
 
 	openInBible = (id, readble) => {
@@ -43,28 +47,29 @@ class SearchBarContainer extends React.PureComponent {
 
 	render() {
 		const results = this.state.searchResults;
-		console.log(results && results.length);
+
 		return (
 			<Container>
 				<SearchBar search={this.onSearch} />
-				<Content>
-					{results && results.length
-						? results.map(result => {
-								return (
-									<SearchResult
-										result={result}
-										key={result.map}
-										open={this.openInBible}
-									/>
-								);
-						  })
-						: null}
-					<View style={s.imageContainer}>
-						<Image
-							source={require('../../assets/libro.jpg')}
-							style={[s.bookImage]}
-						/>
-					</View>
+				<Content contentContainerStyle={s.content}>
+					{results && results.length ? (
+						results.map(result => {
+							return (
+								<SearchResult
+									result={result}
+									key={result.map}
+									open={this.openInBible}
+								/>
+							);
+						})
+					) : (
+						<View style={s.imageContainer}>
+							<Image
+								source={require('../../assets/libro.jpg')}
+								style={[s.bookImage]}
+							/>
+						</View>
+					)}
 				</Content>
 			</Container>
 		);
@@ -72,12 +77,11 @@ class SearchBarContainer extends React.PureComponent {
 }
 
 const s = StyleSheet.create({
+	content: {
+		flex: 1,
+	},
 	imageContainer: {
-		display: 'flex',
-		height: Dimensions.get('window').height - 150,
-		width: '100%',
 		justifyContent: 'center',
-		alignContent: 'center',
 		alignItems: 'center',
 		flex: 1,
 	},
