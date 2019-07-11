@@ -36,9 +36,27 @@ export function initTabBasedNavigation() {
 			root: {
 				sideMenu: {
 					left: {
-						component: {
-							name: 'jw-tools.SideDrawer',
-							id: 'drawerMenu',
+						stack: {
+							children: [
+								{
+									component: {
+										name: 'jw-tools.SideDrawer',
+										id: 'drawerMenu',
+										options: {
+											topBar: {
+												title: {
+													text: 'JW tools',
+													color: 'white',
+													fontWeight: 'bold',
+												},
+												background: {
+													color: '#5B3C88',
+												},
+											},
+										},
+									},
+								},
+							],
 						},
 					},
 					center: {

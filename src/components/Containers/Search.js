@@ -12,11 +12,34 @@ class SearchBarContainer extends React.PureComponent {
 	};
 	currentSearchTimeout = null;
 
+	componentDidMount() {
+		this.navigationEventListener = Navigation.events().bindComponent(this);
+	}
+
+	componentWillUnmount() {
+		if (this.navigationEventListener) {
+			this.navigationEventListener.remove();
+		}
+	}
+
+	navigationButtonPressed({ buttonId }) {
+		if (buttonId !== 'sideMenuButton') {
+			return;
+		}
+		Navigation.mergeOptions('drawerMenu', {
+			sideMenu: {
+				left: {
+					visible: true,
+				},
+			},
+		});
+	}
+
 	onSearch = value => {
 		clearTimeout(this.currentSearchTimeout);
 		this.currentSearchTimeout = setTimeout(() => {
 			this.setState({ searchResults: bible.search(value) });
-		}, 1000);
+		}, 400);
 	};
 
 	openInBible = (id, readble) => {
@@ -51,7 +74,7 @@ class SearchBarContainer extends React.PureComponent {
 		return (
 			<Container>
 				<SearchBar search={this.onSearch} />
-				<Content contentContainerStyle={s.content}>
+				<Content contentContainerStyle={results.length ? [] : s.content}>
 					{results && results.length ? (
 						results.map(result => {
 							return (

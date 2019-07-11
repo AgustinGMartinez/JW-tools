@@ -43,9 +43,8 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 	const found = [];
 	const foundPriority2 = []; // if found with unmatched order in 1 verse
 	const foundPriority3 = []; // if found with unmatched order in 2 verses
-	const getFoundCount = () =>
-		found.length + foundPriority2.length + foundPriority3.length;
-	let breakAll = false;
+	// const getFoundCount = () => found.length;
+	// let breakAll = false;
 	books = books && booksToNumbers(books, abbreviations);
 	// iterate the books
 	for (let i = 1; i <= this.size; i++) {
@@ -67,7 +66,7 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 				// look match on this verse, with order
 				let cleanContent = cleanTextAndVerseNumber(content);
 				phrase = cleanText(phrase);
-				let regex = new RegExp(phrase, 'gi');
+				let regex = new RegExp(phrase, 'i');
 				let matches = regex.test(cleanContent);
 
 				if (matches) {
@@ -79,9 +78,7 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 				} else {
 					// look match on the previous verse and this one concatenated
 					// with order
-					let conc = cleanTextAndVerseNumber(
-						previousVerse.clean + cleanContent
-					);
+					let conc = previousVerse.clean + cleanContent;
 					matches = regex.test(conc);
 					if (matches) {
 						found.push({
@@ -94,7 +91,7 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 						let regexs = phrase
 							.trim()
 							.split(' ')
-							.map(w => new RegExp('\\b' + cleanText(w) + '\\b', 'gi'));
+							.map(w => new RegExp('\\b' + cleanText(w) + '\\b', 'i'));
 						matches = regexs.every(regex => regex.test(cleanContent));
 
 						if (matches) {
@@ -106,9 +103,6 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 						} else {
 							// look match on the previous verse and this one concatenated
 							// without order
-							let conc = cleanTextAndVerseNumber(
-								previousVerse.clean + cleanContent
-							);
 							matches = regexs.every(regex => regex.test(conc));
 
 							if (matches) {
@@ -132,7 +126,7 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 					previousVerse.clean = cleanContent;
 					previousVerse.regular = content;
 				}
-				// no sirve por el tema de las prioridades
+				// ironicamente lo hace mas lento mayormente
 				// if (getFoundCount() >= MAX_RESULTS) breakAll = true;
 				// if (breakAll) break;
 			}
@@ -286,8 +280,8 @@ const bookNames = [
 ];
 
 exports.getBook = function(numberOrAbbr) {
-	if (typeof numberOrAbbr === 'number') {
-		return bible.get(numberOrAbbr);
+	if (!isNaN(Number(numberOrAbbr))) {
+		return bible.get(Number(numberOrAbbr));
 	} else {
 		return bible.get(abbreviations.indexOf(numberOrAbbr) + 1);
 	}
