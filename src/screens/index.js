@@ -21,8 +21,8 @@ export function registerScreens() {
 	Navigation.registerComponent('jw-tools.Search', () =>
 		withRedux(require('./Search/Search').default)
 	);
-	Navigation.registerComponent('jw-tools.BibleView', () =>
-		withRedux(require('./Bible/Bible').default)
+	Navigation.registerComponent('jw-tools.ChapterView', () =>
+		withRedux(require('./Chapter/Chapter').default)
 	);
 }
 

@@ -33,7 +33,7 @@ describe('bible search', function() {
 					'44  ”Y en los días de aquellos reyes el Dios del cielo establecerá un ' +
 					'reino que nunca será reducido a ruinas. Y el reino mismo no será pasado ' +
 					'a ningún otro pueblo. Triturará y pondrá fin a todos estos reinos, y él ' +
-					'mismo subsistirá hasta tiempos indefinidos;45  puesto que contemplaste ' +
+					'mismo subsistirá hasta tiempos indefinidos;  45  puesto que contemplaste ' +
 					'que de la montaña una piedra fue cortada, no por manos, y [que] trituró ' +
 					'el hierro, el cobre, el barro moldeado, la plata y el oro. El magnífico ' +
 					'Dios mismo ha hecho saber al rey lo que ha de ocurrir después de esto. Y ' +
@@ -45,7 +45,7 @@ describe('bible search', function() {
 			{
 				value:
 					'21  Inmediatamente Daniel mismo habló hasta con el rey: “Oh rey, ' +
-					'sigue viviendo aun hasta tiempos indefinidos.22  Mi propio Dios ' +
+					'sigue viviendo aun hasta tiempos indefinidos.  22  Mi propio Dios ' +
 					'envió a su ángel y cerró la boca de los leones, y no me han ' +
 					'arruinado, puesto que delante de él se halló inocencia misma en ' +
 					'mí; y también delante de ti, oh rey, ningún acto nocivo he ' +
@@ -131,45 +131,90 @@ describe('bible search', function() {
 	});
 
 	it('searches with exact order and no order in priorities', function() {
-		expect(search('jehova dijo a mi señor', undefined, 5)).toEqual([
+		expect(search('asi y dios', undefined, 5)).toEqual([
 			{
 				value:
-					'44  ‘Jehová dijo a mi Señor: “Siéntate a mi diestra ' +
-					'hasta que ponga a tus enemigos debajo de tus pies”’?',
-				readble: 'Mateo 22:44',
-				map: '40-22-44',
+					'7  Entonces Dios procedió a hacer la expansión y a hacer una ' +
+					'división entre las aguas que deberían estar debajo de la ' +
+					'expansión y las aguas que deberían estar sobre la expansión. Y ' +
+					'llegó a ser así.  8  Y Dios empezó a llamar a la expansión ' +
+					'Cielo. Y llegó a haber tarde y llegó a haber mañana, un día ' +
+					'segundo.\r' +
+					'\n',
+				readble: 'Génesis 1:7, 8',
+				map: '1-1-7:8',
 			},
 			{
 				value:
-					'36  Por el espíritu santo David mismo dijo: ‘Jehová dijo a mi Señor: ' +
-					'“Siéntate a mi diestra hasta que ponga a tus enemigos debajo de tus ' +
-					'pies”’.',
-				readble: 'Marcos 12:36',
-				map: '41-12-36',
+					'9  Y Dios pasó a decir: “Que las aguas [que están] debajo de los ' +
+					'cielos se reúnan en un mismo lugar y aparezca lo seco”. Y llegó a ' +
+					'ser así.  10  Y Dios empezó a llamar a lo seco Tierra, pero a la ' +
+					'reunión de aguas llamó Mares. Además, vio Dios que [era] bueno.',
+				readble: 'Génesis 1:9, 10',
+				map: '1-1-9:10',
 			},
 			{
 				value:
-					'42  Porque David mismo dice en el libro de los ' +
-					'Salmos: ‘Jehová dijo a mi Señor: “Siéntate a mi ' +
-					'diestra',
-				readble: 'Lucas 20:42',
-				map: '42-20-42',
+					'15  Y tienen que servir de lumbreras en la expansión de los cielos ' +
+					'para brillar sobre la tierra”. Y llegó a ser así.  16  Y Dios procedió ' +
+					'a hacer las dos grandes lumbreras, la lumbrera mayor para dominar el ' +
+					'día y la lumbrera menor para dominar la noche, y también las ' +
+					'estrellas.',
+				readble: 'Génesis 1:15, 16',
+				map: '1-1-15:16',
 			},
 			{
 				value:
-					'34  De hecho, David no ascendió a los cielos, sino que él ' +
-					'mismo dice: ‘Jehová dijo a mi Señor: “Siéntate a mi ' +
-					'diestra,',
-				readble: 'Hechos 2:34',
-				map: '44-2-34',
+					'24  Y Dios pasó a decir: “Produzca la tierra almas vivientes ' +
+					'según sus géneros, animal doméstico y animal moviente y bestia ' +
+					'salvaje de la tierra según su género”. Y llegó a ser así.  25  Y ' +
+					'Dios procedió a hacer la bestia salvaje de la tierra según su ' +
+					'género y el animal doméstico según su género y todo animal ' +
+					'moviente del suelo según su género. Y Dios llegó a ver que [era] ' +
+					'bueno.\r' +
+					'\n',
+				readble: 'Génesis 1:24, 25',
+				map: '1-1-24:25',
 			},
 			{
 				value:
-					'2  A lo que dijo Abrán: “Señor Soberano Jehová, ¿qué ' +
-					'me darás, cuando voy quedándome sin hijo y el que ' +
-					'poseerá mi casa es un hombre de Damasco, Eliezer?”.',
-				readble: 'Génesis 15:2',
-				map: '1-15-2',
+					'11  Y pasó Dios a decir: “Haga brotar la tierra hierba, vegetación ' +
+					'que dé semilla, árboles frutales que lleven fruto según sus ' +
+					'géneros, cuya semilla esté en él, sobre la tierra”. Y llegó a ser ' +
+					'así.',
+				readble: 'Génesis 1:11',
+				map: '1-1-11',
+			},
+		]);
+	});
+
+	it('correctly searches only one word', function() {
+		expect(search('jah', undefined, 3)).toEqual([
+			{
+				value:
+					' 2  Mi fuerza y [mi] poderío es Jah, puesto que él ' +
+					'sirve para mi salvación.Este es mi Dios, y yo lo ' +
+					'elogiaré; el Dios de mi padre, y lo enalteceré.\r' +
+					'\n',
+				readble: 'Éxodo 15:2',
+				map: '2-15-2',
+			},
+			{
+				value:
+					'16  diciendo: “Por estar una mano contra el trono de Jah, ' +
+					'Jehová tendrá guerra con Amaleq de generación en ' +
+					'generación”.',
+				readble: 'Éxodo 17:16',
+				map: '2-17-16',
+			},
+			{
+				value:
+					' 4  Canten ustedes a Dios, celebren con melodía su ' +
+					'nombre;levanten [una canción] a Aquel que cabalga por las ' +
+					'llanuras del desiertocomo Jah, que es su nombre; y estén ' +
+					'jubilosos delante de él;',
+				readble: 'Salmos 68:4',
+				map: '19-68-4',
 			},
 		]);
 	});
@@ -195,6 +240,35 @@ describe('getter', function() {
 				.trim()
 		).toBe(
 			'44  ”Y en los días de aquellos reyes el Dios del cielo establecerá un reino que nunca será reducido a ruinas. Y el reino mismo no será pasado a ningún otro pueblo. Triturará y pondrá fin a todos estos reinos, y él mismo subsistirá hasta tiempos indefinidos;45  puesto que contemplaste que de la montaña una piedra fue cortada, no por manos, y [que] trituró el hierro, el cobre, el barro moldeado, la plata y el oro. El magnífico Dios mismo ha hecho saber al rey lo que ha de ocurrir después de esto. Y el sueño es confiable, y la interpretación de él es digna de confianza”.'
+		);
+	});
+
+	it('correctly gets a range map', function() {
+		expect(
+			getBook(27)
+				.get(2)
+				.getRangeMap('44-45')
+		).toEqual(
+			new Map([
+				[
+					44,
+					'44  ”Y en los días de aquellos reyes el Dios del cielo ' +
+						'establecerá un reino que nunca será reducido a ruinas. Y el reino ' +
+						'mismo no será pasado a ningún otro pueblo. Triturará y pondrá fin ' +
+						'a todos estos reinos, y él mismo subsistirá hasta tiempos ' +
+						'indefinidos;',
+				],
+				[
+					45,
+					'45  puesto que contemplaste que de la montaña una piedra fue ' +
+						'cortada, no por manos, y [que] trituró el hierro, el cobre, el ' +
+						'barro moldeado, la plata y el oro. El magnífico Dios mismo ha ' +
+						'hecho saber al rey lo que ha de ocurrir después de esto. Y el ' +
+						'sueño es confiable, y la interpretación de él es digna de ' +
+						'confianza”.\r' +
+						'\n',
+				],
+			])
 		);
 	});
 });

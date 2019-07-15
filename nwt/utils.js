@@ -1,17 +1,16 @@
 exports.cleanText = text =>
 	text
 		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.replace(/([^\w\d\s])/g, '')
-		.replace();
+		.replace(/[\u0300-\u036f]/g, '') // quitar acentos
+		.replace(/ +/g, ' ') // cambia mas de 1 espacio por uno solo
+		.replace(/([^\w\d\s])/g, ''); //  limpia cualquier otra cosa
 
 exports.cleanTextAndVerseNumber = text =>
 	text
 		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.replace(/(\d+\s{2}|\d+\t)/g, ' ')
-		.replace(/([^\w\d\s])/g, '')
-		.replace();
+		.replace(/[\u0300-\u036f]/g, '') // quitar acentos
+		.replace(/(\d+\s{2}|\d+\t)/g, ' ') // quita el numero de versiculo
+		.replace(/([^\w\d\s])/g, ''); //  limpia cualquier otra cosa
 
 exports.booksToNumbers = (books, abbreviations) => {
 	return books

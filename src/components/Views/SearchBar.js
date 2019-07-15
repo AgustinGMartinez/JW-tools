@@ -5,15 +5,18 @@ import { StyleSheet } from 'react-native';
 class SearchBar extends React.PureComponent {
 	render() {
 		const search = this.props.search;
+		const reset = this.props.reset;
+		const value = this.props.value;
+
 		return (
 			<Header searchBar rounded style={s.header}>
 				<Item>
 					<Icon name="md-search" />
-					<Input placeholder="Buscar" onChangeText={search} />
+					<Input placeholder="Buscar" value={value} onChangeText={search} />
+					{/* <Button onPress={reset} transparent> */}
+					<Icon name="md-close" onPress={reset} />
+					{/* </Button> */}
 				</Item>
-				<Button transparent>
-					<Text>Buscar</Text>
-				</Button>
 			</Header>
 		);
 	}

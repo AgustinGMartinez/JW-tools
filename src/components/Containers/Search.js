@@ -2,13 +2,16 @@ import React from 'react';
 import bible from '../../utils/bible';
 import SearchBar from '../Views/SearchBar';
 import SearchResult from '../Views/SearchResult';
-import { Content, Container } from 'native-base';
+import { Content, Container, Spinner, Text } from 'native-base';
 import { Navigation } from 'react-native-navigation';
-import { Image, StyleSheet, View, Dimensions } from 'react-native';
+import { Image, StyleSheet, View, Dimensions, Keyboard } from 'react-native';
 
 class SearchBarContainer extends React.PureComponent {
 	state = {
+		searchValue: '',
 		searchResults: [],
+		loading: false,
+		touched: false,
 	};
 	currentSearchTimeout = null;
 
@@ -37,15 +40,20 @@ class SearchBarContainer extends React.PureComponent {
 
 	onSearch = value => {
 		clearTimeout(this.currentSearchTimeout);
+		this.setState({ loading: true, touched: value !== '', searchValue: value });
 		this.currentSearchTimeout = setTimeout(() => {
-			this.setState({ searchResults: bible.search(value) });
-		}, 400);
+			this.setState({
+				searchResults: bible.search(value, undefined, 100),
+				loading: false,
+			});
+		}, 1000);
 	};
 
 	openInBible = (id, readble) => {
+		Keyboard.dismiss();
 		Navigation.push(this.props.componentId, {
 			component: {
-				name: 'jw-tools.BibleView',
+				name: 'jw-tools.ChapterView',
 				passProps: {
 					id: id,
 				},
@@ -68,14 +76,27 @@ class SearchBarContainer extends React.PureComponent {
 		});
 	};
 
+	resetInput = () => {
+		this.setState({ searchValue: '', touched: false });
+	};
+
 	render() {
+		const searchValue = this.state.searchValue;
 		const results = this.state.searchResults;
+		const loading = this.state.loading;
+		const touched = this.state.touched;
 
 		return (
 			<Container>
-				<SearchBar search={this.onSearch} />
+				<SearchBar
+					search={this.onSearch}
+					reset={this.resetInput}
+					value={searchValue}
+				/>
 				<Content contentContainerStyle={results.length ? [] : s.content}>
-					{results && results.length ? (
+					{loading ? (
+						<Spinner color={'#5B3C88'} />
+					) : results.length ? (
 						results.map(result => {
 							return (
 								<SearchResult
@@ -85,6 +106,8 @@ class SearchBarContainer extends React.PureComponent {
 								/>
 							);
 						})
+					) : touched ? (
+						<Text style={s.noResults}>Sin resultados</Text>
 					) : (
 						<View style={s.imageContainer}>
 							<Image
@@ -102,6 +125,8 @@ class SearchBarContainer extends React.PureComponent {
 const s = StyleSheet.create({
 	content: {
 		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	imageContainer: {
 		justifyContent: 'center',
@@ -113,6 +138,7 @@ const s = StyleSheet.create({
 		width: 200,
 		height: 200,
 	},
+	noResults: {},
 });
 
 export default SearchBarContainer;

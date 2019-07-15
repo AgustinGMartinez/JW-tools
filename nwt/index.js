@@ -26,6 +26,17 @@ Object.keys(all).forEach(function(bookNumber) {
 			return result;
 		};
 
+		content.getRangeMap = function(string) {
+			const [from, to] = string.split('-');
+			let result = new Map();
+			for (let i = 0; i <= to - from; i++) {
+				let verse = i + Number(from);
+				if (verse > this.size) break;
+				result.set(verse, this.get(verse));
+			}
+			return result;
+		};
+
 		if (!(bible.get(Number(bookNumber)) instanceof Map)) {
 			bible.set(Number(bookNumber), new Map());
 		}
@@ -58,6 +69,8 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 				// we will look into 2 verses max at the same time
 				clean: '',
 				regular: '',
+				verseNumber: 0,
+				typeOfMatch: '', // 1, 2 or 3. 1 should be used though
 			};
 			// iterate all verses
 			for (let k = 1; k <= currentChapter.size; k++) {
@@ -66,35 +79,59 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 				// look match on this verse, with order
 				let cleanContent = cleanTextAndVerseNumber(content);
 				phrase = cleanText(phrase);
-				let regex = new RegExp(phrase, 'i');
-				let matches = regex.test(cleanContent);
+				let regex;
+				const phraseWords = phrase.trim().split(' ');
+				if (phraseWords.length > 1) {
+					regex = new RegExp(phrase, 'i');
+				} else {
+					regex = new RegExp('\\b' + phrase + '\\b', 'i');
+				}
+				let matchesWithPriority = regex.test(cleanContent);
 
-				if (matches) {
+				let matchesPriority2, matchesPriority3;
+
+				if (matchesWithPriority) {
 					found.push({
 						value: content,
 						readble: bookNames[i - 1] + ' ' + j + ':' + k,
 						map: i + '-' + j + '-' + k,
 					});
+					// if previous verse had a match and it was and priority 2 or 3 one, then pop it to, basically, replace it with this one
+					if (previousVerse.typeOfMatch) {
+						if (previousVerse.typeOfMatch === 'matchesPriority2') {
+							foundPriority2.pop();
+						} else if (previousVerse.typeOfMatch === 'matchesPriority3') {
+							foundPriority3.pop();
+						}
+					}
 				} else {
 					// look match on the previous verse and this one concatenated
 					// with order
 					let conc = previousVerse.clean + cleanContent;
-					matches = regex.test(conc);
-					if (matches) {
+					matchesWithPriority = regex.test(conc);
+					if (matchesWithPriority) {
 						found.push({
-							value: previousVerse.regular + content,
+							value: previousVerse.regular + '  ' + content,
 							readble: bookNames[i - 1] + ' ' + j + ':' + (k - 1) + ', ' + k,
 							map: i + '-' + j + '-' + (k - 1) + ':' + k,
 						});
+						// if previous verse had a match and it was and priority 2 or 3 one, then pop it to, basically, replace it with this one
+						if (previousVerse.typeOfMatch) {
+							if (previousVerse.typeOfMatch === 'matchesPriority2') {
+								foundPriority2.pop();
+							} else if (previousVerse.typeOfMatch === 'matchesPriority3') {
+								foundPriority3.pop();
+							}
+						}
 					} else {
 						// check match without keeping order (in 1 verse)
 						let regexs = phrase
 							.trim()
 							.split(' ')
 							.map(w => new RegExp('\\b' + cleanText(w) + '\\b', 'i'));
-						matches = regexs.every(regex => regex.test(cleanContent));
+						matchesPriority2 = regexs.every(regex => regex.test(cleanContent));
 
-						if (matches) {
+						if (matchesPriority2) {
 							foundPriority2.push({
 								value: content,
 								readble: bookNames[i - 1] + ' ' + j + ':' + k,
@@ -103,28 +140,39 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 						} else {
 							// look match on the previous verse and this one concatenated
 							// without order
-							matches = regexs.every(regex => regex.test(conc));
 
-							if (matches) {
-								foundPriority3.push({
-									value: previousVerse.regular + content,
-									readble:
-										bookNames[i - 1] + ' ' + j + ':' + (k - 1) + ', ' + k,
-									map: i + '-' + j + '-' + (k - 1) + ':' + k,
-								});
+							// if previous verse was a match without order, this will be a match too, let's prevent that
+							if (previousVerse.typeOfMatch !== 'matchesPriority2') {
+								matchesPriority3 = regexs.every(regex => regex.test(conc));
+								if (matchesPriority3) {
+									foundPriority3.push({
+										value: previousVerse.regular + '  ' + content,
+										readble:
+											bookNames[i - 1] + ' ' + j + ':' + (k - 1) + ', ' + k,
+										map: i + '-' + j + '-' + (k - 1) + ':' + k,
+									});
+								}
 							}
 						}
 					}
 				}
 
-				// reset so we don't get duplicates
-				if (matches) {
+				// reset so we don't get duplicates for priorities
+				if (matchesWithPriority) {
 					previousVerse.clean = '';
 					previousVerse.regular = '';
+					previousVerse.verseNumber = 0;
+					previousVerse.typeOfMatch = '';
 				} else {
 					// else keep trying to find a concatenable match
 					previousVerse.clean = cleanContent;
 					previousVerse.regular = content;
+					previousVerse.verseNumber = k;
+					previousVerse.typeOfMatch = matchesPriority2
+						? 'matchesPriority2'
+						: matchesPriority3
+						? 'matchesPriority3'
+						: '';
 				}
 				// ironicamente lo hace mas lento mayormente
 				// if (getFoundCount() >= MAX_RESULTS) breakAll = true;
@@ -289,10 +337,10 @@ exports.getBook = function(numberOrAbbr) {
 
 exports.search = bible.search.bind(bible);
 
-// console.log(exports.search('jehova dijo a mi señor', undefined, 5));
+// console.log(exports.search('jah', undefined, 3));
 // console.log(
 // 	exports
-// 		.getBook(27)
-// 		.get(2)
-// 		.getRange('44-45')
+// 		.getBook(1)
+// 		.get(1)
+// 		.getRangeMap('9-10')
 // );
