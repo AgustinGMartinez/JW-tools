@@ -3,8 +3,8 @@ import bible from '../../utils/bible';
 import SearchBar from '../Views/SearchBar';
 import SearchResult from '../Views/SearchResult';
 import { Content, Container, Spinner, Text } from 'native-base';
-import { Navigation } from 'react-native-navigation';
-import { Image, StyleSheet, View, Dimensions, Keyboard } from 'react-native';
+import { Image, StyleSheet, View, Dimensions } from 'react-native';
+import { withMenuButton, pushView } from '../../utils/navigation';
 
 class SearchBarContainer extends React.PureComponent {
 	state = {
@@ -14,29 +14,6 @@ class SearchBarContainer extends React.PureComponent {
 		touched: false,
 	};
 	currentSearchTimeout = null;
-
-	componentDidMount() {
-		this.navigationEventListener = Navigation.events().bindComponent(this);
-	}
-
-	componentWillUnmount() {
-		if (this.navigationEventListener) {
-			this.navigationEventListener.remove();
-		}
-	}
-
-	navigationButtonPressed({ buttonId }) {
-		if (buttonId !== 'sideMenuButton') {
-			return;
-		}
-		Navigation.mergeOptions('drawerMenu', {
-			sideMenu: {
-				left: {
-					visible: true,
-				},
-			},
-		});
-	}
 
 	onSearch = value => {
 		clearTimeout(this.currentSearchTimeout);
@@ -50,29 +27,14 @@ class SearchBarContainer extends React.PureComponent {
 	};
 
 	openInBible = (id, readble) => {
-		Keyboard.dismiss();
-		Navigation.push(this.props.componentId, {
-			component: {
-				name: 'jw-tools.ChapterView',
-				passProps: {
-					id: id,
-				},
-				options: {
-					topBar: {
-						title: {
-							text: readble.split(':')[0],
-							color: 'white',
-						},
-						background: {
-							color: '#5B3C88',
-						},
-						backButton: {
-							color: 'white',
-							visible: true,
-						},
-					},
-				},
-			},
+		const props = {
+			id: id,
+		};
+		pushView({
+			screenId: 'jw-tools.ChapterView',
+			title: readble.split(':')[0],
+			passProps: props,
+			componentId: this.props.componentId,
 		});
 	};
 
@@ -93,7 +55,9 @@ class SearchBarContainer extends React.PureComponent {
 					reset={this.resetInput}
 					value={searchValue}
 				/>
-				<Content contentContainerStyle={results.length ? [] : s.content}>
+				<Content
+					contentContainerStyle={!loading && results.length ? [] : s.content}
+				>
 					{loading ? (
 						<Spinner color={'#5B3C88'} />
 					) : results.length ? (
@@ -141,4 +105,4 @@ const s = StyleSheet.create({
 	noResults: {},
 });
 
-export default SearchBarContainer;
+export default withMenuButton(SearchBarContainer);

@@ -1,0 +1,52 @@
+[
+	{
+		"displayName": "El reino de Dios",
+		"verses": [
+			{
+				"dispayName": "Mateo 5:9, 10",
+				"accesor": "mate-5-9:10"
+			},
+			{
+				"dispayName": "Daniel 2:44",
+				"accesor": "dani-2-44"
+			},
+			{
+				"dispayName": "Revelación 21:3, 4",
+				"accesor": "reve-21-3:4"
+			},
+			{
+				"dispayName": "Juan 3:16",
+				"accesor": "juan-3-26"
+			},
+			{
+				"dispayName": "Juan 17:3",
+				"accesor": "juan-17-3"
+			}
+		]
+	},
+	{
+		"displayName": "El reino de Dios 2",
+		"verses": [
+			{
+				"dispayName": "Mateo 5:9, 10",
+				"accesor": "mate-5-9:10"
+			},
+			{
+				"dispayName": "Daniel 2:44",
+				"accesor": "dani-2-44"
+			},
+			{
+				"dispayName": "Revelación 21:3, 4",
+				"accesor": "reve-21-3:4"
+			},
+			{
+				"dispayName": "Juan 3:16",
+				"accesor": "juan-3-26"
+			},
+			{
+				"dispayName": "Juan 17:3",
+				"accesor": "juan-17-3"
+			}
+		]
+	}
+]

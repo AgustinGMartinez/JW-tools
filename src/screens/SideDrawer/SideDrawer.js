@@ -1,27 +1,34 @@
 import React from 'react';
-import { View, Dimensions, StyleSheet } from 'react-native';
-import {
-	Container,
-	Header,
-	Content,
-	List,
-	ListItem,
-	Text,
-	Icon,
-	Left,
-	Body,
-	Right,
-	Switch,
-	Button,
-} from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Container, Content, View, ListItem, Text } from 'native-base';
+import { initRootNavigation } from '../../utils/navigation';
 
 class SideDrawer extends React.Component {
+	changeView = id => {
+		switch (id) {
+			case 'home':
+				this.openView('jw-tools.Search', 'Inicio');
+				break;
+
+			case 'preaching':
+				this.openView('jw-tools.Preaching', 'Para predicar');
+				break;
+
+			default:
+				break;
+		}
+	};
+
+	openView = (screenId, title) => {
+		initRootNavigation({ screenId, title });
+	};
+
 	render() {
 		return (
 			<Container>
 				<Content>
-					<List>
-						<ListItem>
+					<View>
+						<ListItem onPress={() => this.changeView('home')}>
 							<Text>Inicio</Text>
 						</ListItem>
 						<ListItem>
@@ -33,7 +40,7 @@ class SideDrawer extends React.Component {
 						<ListItem>
 							<Text>Lecciones</Text>
 						</ListItem>
-						<ListItem>
+						<ListItem onPress={() => this.changeView('preaching')}>
 							<Text>Para predicar</Text>
 						</ListItem>
 						<ListItem>
@@ -45,17 +52,13 @@ class SideDrawer extends React.Component {
 						<ListItem>
 							<Text>Configuración</Text>
 						</ListItem>
-					</List>
+					</View>
 				</Content>
 			</Container>
 		);
 	}
 }
 
-const s = StyleSheet.create({
-	header: {
-		backgroundColor: '#5B3C88',
-	},
-});
+const s = StyleSheet.create({});
 
 export default SideDrawer;

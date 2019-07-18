@@ -24,9 +24,12 @@ export function registerScreens() {
 	Navigation.registerComponent('jw-tools.ChapterView', () =>
 		withRedux(require('./Chapter/Chapter').default)
 	);
+	Navigation.registerComponent('jw-tools.Preaching', () =>
+		withRedux(require('./Preaching/Preaching').default)
+	);
 }
 
-export function initTabBasedNavigation() {
+export function initRootNavigation({ screenId, title }) {
 	Promise.all([
 		Icon.getImageSource('md-map', 30),
 		Icon.getImageSource('ios-share-alt', 30),
@@ -65,12 +68,15 @@ export function initTabBasedNavigation() {
 							children: [
 								{
 									component: {
-										name: 'jw-tools.Search',
+										name: screenId,
 										options: {
 											topBar: {
 												title: {
-													text: 'Inicio',
+													text: title,
 													color: 'white',
+												},
+												background: {
+													color: '#5B3C88',
 												},
 												leftButtons: [
 													{
@@ -79,9 +85,6 @@ export function initTabBasedNavigation() {
 														color: 'white',
 													},
 												],
-												background: {
-													color: '#5B3C88',
-												},
 											},
 										},
 									},

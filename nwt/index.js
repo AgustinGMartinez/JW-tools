@@ -340,7 +340,7 @@ exports.search = bible.search.bind(bible);
 // console.log(exports.search('jah', undefined, 3));
 // console.log(
 // 	exports
-// 		.getBook(1)
-// 		.get(1)
-// 		.getRangeMap('9-10')
+// 		.getBook('salm')
+// 		.get(48)
+// 		.get(14)
 // );

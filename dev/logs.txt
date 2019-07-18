@@ -1,1 +1,0 @@
-Error: ENOENT: no such file or directory, open 'C:\Users\agus_\proyectos\jw-tools\nws\1\2.json'/n

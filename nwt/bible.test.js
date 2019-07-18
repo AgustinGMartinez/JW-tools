@@ -193,7 +193,7 @@ describe('bible search', function() {
 			{
 				value:
 					' 2  Mi fuerza y [mi] poderío es Jah, puesto que él ' +
-					'sirve para mi salvación.Este es mi Dios, y yo lo ' +
+					'sirve para mi salvación. Este es mi Dios, y yo lo ' +
 					'elogiaré; el Dios de mi padre, y lo enalteceré.\r' +
 					'\n',
 				readble: 'Éxodo 15:2',
@@ -210,8 +210,8 @@ describe('bible search', function() {
 			{
 				value:
 					' 4  Canten ustedes a Dios, celebren con melodía su ' +
-					'nombre;levanten [una canción] a Aquel que cabalga por las ' +
-					'llanuras del desiertocomo Jah, que es su nombre; y estén ' +
+					'nombre; levanten [una canción] a Aquel que cabalga por las ' +
+					'llanuras del desierto como Jah, que es su nombre; y estén ' +
 					'jubilosos delante de él;',
 				readble: 'Salmos 68:4',
 				map: '19-68-4',

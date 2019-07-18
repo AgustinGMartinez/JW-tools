@@ -26,7 +26,7 @@ class Chapter extends React.PureComponent {
 		if (highlight) highlight = highlight.split(':').map(Number);
 
 		const content = bible
-			.getBook(+book)
+			.getBook(book)
 			.get(+chapter)
 			.getRangeMap('1-999');
 		this.setState({ content: content, highlight });
@@ -142,6 +142,8 @@ class Chapter extends React.PureComponent {
 					contentContainerStyle={s.container}
 					ref={content => (this.content = content)}
 					onLayout={this.onhighlightTextRendered}
+					nestedScrollEnabled
+					showsVerticalScrollIndicator={false}
 				>
 					{content ? (
 						// this is the view hack
@@ -165,6 +167,7 @@ const s = StyleSheet.create({
 		paddingBottom: 30,
 		paddingLeft: 20,
 		paddingRight: 20,
+		width: Dimensions.get('window').width,
 	},
 	chapterNumber: {
 		color: '#5B3C88',
