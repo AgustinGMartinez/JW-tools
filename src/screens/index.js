@@ -27,14 +27,16 @@ export function registerScreens() {
 	Navigation.registerComponent('jw-tools.Preaching', () =>
 		withRedux(require('./Preaching/Preaching').default)
 	);
+	Navigation.registerComponent('jw-tools.BibleCombos', () =>
+		withRedux(require('./BibleCombos/BibleCombos').default)
+	);
+	Navigation.registerComponent('jw-tools.Settings', () =>
+		withRedux(require('./Settings/Settings').default)
+	);
 }
 
 export function initRootNavigation({ screenId, title }) {
-	Promise.all([
-		Icon.getImageSource('md-map', 30),
-		Icon.getImageSource('ios-share-alt', 30),
-		Icon.getImageSource('ios-menu', 30),
-	]).then(([icon1, icon2, icon3]) => {
+	Promise.all([Icon.getImageSource('ios-menu', 30)]).then(([menuIcon]) => {
 		Navigation.setRoot({
 			root: {
 				sideMenu: {
@@ -81,7 +83,7 @@ export function initRootNavigation({ screenId, title }) {
 												leftButtons: [
 													{
 														id: 'sideMenuButton',
-														icon: icon3,
+														icon: menuIcon,
 														color: 'white',
 													},
 												],

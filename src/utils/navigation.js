@@ -5,7 +5,13 @@ import { initRootNavigation as irn } from '../screens/index';
 
 export const initRootNavigation = irn;
 
-export const pushView = function({ screenId, passProps, title, componentId }) {
+export const pushView = function({
+	screenId,
+	passProps,
+	title,
+	componentId,
+	subtitle = undefined,
+}) {
 	Keyboard.dismiss();
 	Navigation.push(componentId, {
 		component: {
@@ -15,6 +21,10 @@ export const pushView = function({ screenId, passProps, title, componentId }) {
 				topBar: {
 					title: {
 						text: title,
+						color: 'white',
+					},
+					subtitle: {
+						text: subtitle,
 						color: 'white',
 					},
 					background: {

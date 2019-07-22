@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Card, CardItem, Text, Body } from 'native-base';
 
-export default class CardItemBordered extends Component {
+class CardItemBordered extends Component {
 	render() {
-		const result = this.props.result;
+		const { result } = this.props;
 		return (
 			<Card>
 				<CardItem
@@ -23,3 +23,5 @@ export default class CardItemBordered extends Component {
 		);
 	}
 }
+
+export default CardItemBordered;

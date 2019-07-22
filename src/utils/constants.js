@@ -1,2 +1,4 @@
-export const ADD_PLACE = 'ADD_PLACE';
-export const DELETE_PLACE = 'DELETE_PLACE';
+export const STORAGE_FONTSIZE = 'STORAGE_FONTSIZE';
+
+// actions
+export const SET_GLOBAL_FONTSIZE = 'SET_GLOBAL_FONTSIZE';

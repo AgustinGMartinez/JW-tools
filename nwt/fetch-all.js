@@ -19,7 +19,7 @@ async function main() {
 			maxBooks = 66;
 
 		let generalData = await fetch(
-			'https://www.jw.org/es/publicaciones/biblia/bi12/libros/json/data/'
+			'https://www.jw.org/es/publicaciones/biblia/nwt/libros/json/data/'
 		);
 		let parsedGeneralData = await generalData.json();
 
@@ -49,7 +49,8 @@ async function main() {
 					currentChapter.toString().padStart(3, '0') +
 					'999'; //1001001 - 1001999 : desde el libro 1, capitulo 1, versiculo 1 a mismo cap verse 999
 				let response = await fetch(
-					'https://www.jw.org/es/publicaciones/biblia/bi12/libros/json/data/' +
+					// 'https://www.jw.org/es/publicaciones/biblia/bi12/libros/json/data/' +
+					'https://www.jw.org/es/publicaciones/biblia/nwt/libros/json/data/' +
 						parsedVerseRange
 				);
 				let jsonRes = await response.json();
@@ -61,7 +62,8 @@ async function main() {
 						.replace(/<[^>]*>?/gm, '') // remove all other tags
 						.replace(/ $/, '') // remove last space if there is one
 						.replace(/ \r\n/, '\r\n')
-						.replace(/(\D)  /gm, '$1 '); // remove double spaces except for those after the verse number
+						.replace(/(\D)  /gm, '$1 ') // remove double spaces except for those after the verse number
+						.replace(/[\*\+]/gm, ''); // remove + and *
 				});
 				const formattedVerses = {};
 				verses.forEach((verse, index) => {
@@ -69,7 +71,7 @@ async function main() {
 				});
 				const filePath =
 					__dirname +
-					'/content/' +
+					'/content2/' +
 					currentBook +
 					'/' +
 					currentChapter +

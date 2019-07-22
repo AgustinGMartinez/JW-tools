@@ -50,7 +50,7 @@ Object.keys(all).forEach(function(bookNumber) {
 
 bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 	// console.time('search');
-	if (phrase.trim() === '') return [];
+	if (phrase.trim() === '') return { results: [], total: 0 };
 	const found = [];
 	const foundPriority2 = []; // if found with unmatched order in 1 verse
 	const foundPriority3 = []; // if found with unmatched order in 2 verses
@@ -183,10 +183,14 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 		// if (breakAll) break;
 	}
 	// console.timeEnd('search');
-	return found
+	const results = found
 		.concat(foundPriority2)
 		.concat(foundPriority3)
 		.slice(0, MAX_RESULTS);
+	return {
+		results,
+		total: results.length,
+	};
 };
 
 const abbreviations = [

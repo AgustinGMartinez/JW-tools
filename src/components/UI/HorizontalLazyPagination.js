@@ -37,7 +37,7 @@ class HorizontalLazyPagination extends React.Component {
 			event.nativeEvent.contentOffset.x / Dimensions.get('window').width
 		);
 		this.setState({ central: newIndex });
-		this.props.onReleaseDragTouch(newIndex);
+		this.props.onReleaseDragTouch(this.props.data, newIndex);
 	};
 
 	renderDummyContent = () => (

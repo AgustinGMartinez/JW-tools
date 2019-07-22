@@ -15,42 +15,46 @@ import combos from '../../data/preaching.json';
 import { withMenuButton } from '../../utils/navigation';
 import BibleChapter from './Chapter';
 import HorizontalLazyPagination from '../UI/HorizontalLazyPagination';
+import { pushView } from '../../utils/navigation';
 
 class Preaching extends React.PureComponent {
+	openCombos = verses => {
+		pushView({
+			screenId: 'jw-tools.BibleCombos',
+			passProps: {
+				verses,
+			},
+			title: verses[0].displayName.split(':')[0],
+			subtitle: verses[0].displayName.split(':')[1],
+			componentId: this.props.componentId,
+		});
+	};
+
 	render() {
 		return (
-			// <Container>
-			// 	<Content>
-			/* <View>
+			<Container>
+				<Content>
+					<View>
 						{combos.map(combo => {
 							return (
-								<ListItem key={combo.displayName} icon>
+								<ListItem
+									key={combo.displayName}
+									icon
+									onPress={() => this.openCombos(combo.verses)}
+								>
 									<Body>
 										<Text>{combo.displayName}</Text>
 									</Body>
 
 									<Right>
-										<Icon active name="arrow-forward" />
+										<Icon active name="ios-arrow-forward" />
 									</Right>
 								</ListItem>
 							);
 						})}
-					</View> */
-
-			/* <BibleChapter id={'gene-2-4:7'} />
+					</View>
 				</Content>
-			</Container> */
-			<HorizontalLazyPagination
-				data={[
-					<BibleChapter key={'gene-2-4:7'} id={'gene-2-4:7'} />,
-					<BibleChapter key={'22-2-2:7'} id={'22-2-2:7'} />,
-					<BibleChapter key={'55-2-1:3'} id={'55-2-1:3'} />,
-					<BibleChapter key={'66-22-5:7'} id={'66-22-5:7'} />,
-				]}
-				renderRow={item => item}
-				loader={<Spinner color={'#5B3C88'} />}
-				numberOfRenderedViews={3}
-			/>
+			</Container>
 		);
 	}
 }

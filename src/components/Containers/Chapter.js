@@ -1,13 +1,8 @@
 import React from 'react';
 import bible from '../../utils/bible';
-import { Content, Container, Text, Spinner } from 'native-base';
-import {
-	FlatList,
-	StyleSheet,
-	View,
-	ScrollView,
-	Dimensions,
-} from 'react-native';
+import { Container, Text, Spinner } from 'native-base';
+import { StyleSheet, View, ScrollView, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
 
 /**
  * THIS COMPONENT MUST BE CALLED WITH THE PROP ID, WHICH CAN BE '19-1-1' || '19-1-1:3' || '19-1'
@@ -35,16 +30,25 @@ class Chapter extends React.PureComponent {
 	onhighlightTextRendered = e => {
 		if (this.highlightedText) {
 			this.highlightedText.measure((fx, fy, width, height, px, py) => {
-				this.content.scrollTo({
-					x: px,
-					y: py - 20, // add a little margin
-				});
+				if (this.content) {
+					this.content.scrollTo({
+						x: px,
+						y: py - 20, // add a little margin
+					});
+				}
 			});
 		}
 	};
 
 	render() {
 		const { content, highlight } = this.state;
+		const { settingsFontSize } = this.props;
+		const userFontSize = multiplier => ({
+			fontSize: settingsFontSize * multiplier,
+		});
+		const chapterNumberStyling = [s.chapterNumber, userFontSize(1.5)];
+		const verseNumberStyling = [s.verseNumber, userFontSize(1.15)];
+		const verseContentStyling = [s.verseContent, userFontSize(1)];
 
 		// SEPARETED CONTENT FOR THE VIEW HACK
 		const displayContentHalf1 = [];
@@ -87,16 +91,20 @@ class Chapter extends React.PureComponent {
 								}
 							}}
 							key={index}
-							style={[s.wrap, s.verseContent]}
+							style={[s.wrap, verseContentStyling]}
 						>
 							<Text>
-								<Text style={index === 1 ? s.chapterNumber : s.verseNumber}>
+								<Text
+									style={
+										index === 1 ? chapterNumberStyling : verseNumberStyling
+									}
+								>
 									{text.slice(
 										0,
 										index < 10 ? 3 : 4 // number and 2 spaces after it
 									) /* includes spaces so not to highlight them*/}
 								</Text>
-								<Text style={[s.verseContent, s.highlighted]}>
+								<Text style={[verseContentStyling, s.highlighted]}>
 									{/* trim the last highlighted text, because the view hack already jumps to a new line */}
 									{highlightVerses.slice(-1)[0] === index
 										? text.slice(index < 10 ? 3 : 4).trim()
@@ -110,10 +118,12 @@ class Chapter extends React.PureComponent {
 						<Text key={index}>
 							{/* below is to add space between verses */}
 							&nbsp;&nbsp;
-							<Text style={index === 1 ? s.chapterNumber : s.verseNumber}>
+							<Text
+								style={index === 1 ? chapterNumberStyling : verseNumberStyling}
+							>
 								{text.slice(0, 2)}
 							</Text>
-							<Text style={s.verseContent}>
+							<Text style={verseContentStyling}>
 								{/* if it's the verse right before the highlighted ones, trim because the view hack already jumps to a new line */}
 								{highlightVerses[0] - index === 1
 									? text.slice(2).trim()
@@ -123,10 +133,12 @@ class Chapter extends React.PureComponent {
 					);
 				} else {
 					displayContentHalf2.push(
-						<Text key={index} style={s.verseContent}>
+						<Text key={index} style={verseContentStyling}>
 							{/* below is to add space between verses */}
 							&nbsp;&nbsp;
-							<Text style={index === 1 ? s.chapterNumber : s.verseNumber}>
+							<Text
+								style={index === 1 ? chapterNumberStyling : verseNumberStyling}
+							>
 								{text.slice(0, 2)}
 							</Text>
 							{text.slice(2)}
@@ -192,4 +204,8 @@ const s = StyleSheet.create({
 	},
 });
 
-export default Chapter;
+const mapStateToProps = state => ({
+	settingsFontSize: state.settings.fontSize,
+});
+
+export default connect(mapStateToProps)(Chapter);

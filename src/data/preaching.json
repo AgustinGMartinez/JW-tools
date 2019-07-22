@@ -3,48 +3,151 @@
 		"displayName": "El reino de Dios",
 		"verses": [
 			{
-				"dispayName": "Mateo 5:9, 10",
-				"accesor": "mate-5-9:10"
+				"displayName": "Mateo 6:9, 10",
+				"accesor": "mate-6-9:10"
 			},
 			{
-				"dispayName": "Daniel 2:44",
+				"displayName": "Daniel 2:44",
 				"accesor": "dani-2-44"
 			},
 			{
-				"dispayName": "Revelación 21:3, 4",
+				"displayName": "Revelación 21:3, 4",
 				"accesor": "reve-21-3:4"
 			},
 			{
-				"dispayName": "Juan 3:16",
-				"accesor": "juan-3-26"
+				"displayName": "Juan 3:16",
+				"accesor": "juan-3-16"
 			},
 			{
-				"dispayName": "Juan 17:3",
+				"displayName": "Juan 17:3",
 				"accesor": "juan-17-3"
 			}
 		]
 	},
 	{
-		"displayName": "El reino de Dios 2",
+		"displayName": "El sufrimiento",
 		"verses": [
 			{
-				"dispayName": "Mateo 5:9, 10",
-				"accesor": "mate-5-9:10"
+				"displayName": "Job 34:10",
+				"accesor": "job-34-10"
 			},
 			{
-				"dispayName": "Daniel 2:44",
+				"displayName": "1 Juan 5:19",
+				"accesor": "1jua-5-19"
+			},
+			{
+				"displayName": "Mateo 6:9, 10",
+				"accesor": "mate-6-9:10"
+			},
+			{
+				"displayName": "Daniel 2:44",
 				"accesor": "dani-2-44"
 			},
 			{
-				"dispayName": "Revelación 21:3, 4",
+				"displayName": "Revelación 21:3, 4",
 				"accesor": "reve-21-3:4"
 			},
 			{
-				"dispayName": "Juan 3:16",
-				"accesor": "juan-3-26"
+				"displayName": "Juan 3:16",
+				"accesor": "juan-3-16"
 			},
 			{
-				"dispayName": "Juan 17:3",
+				"displayName": "Juan 17:3",
+				"accesor": "juan-17-3"
+			}
+		]
+	},
+	{
+		"displayName": "La maldad en el mundo",
+		"verses": [
+			{
+				"displayName": "2 Timoteo 3:1-5",
+				"accesor": "2tim-3-1:5"
+			},
+			{
+				"displayName": "1 Juan 5:19",
+				"accesor": "1jua-5-19"
+			},
+			{
+				"displayName": "Revelación 21:3, 4",
+				"accesor": "reve-21-3:4"
+			},
+			{
+				"displayName": "Daniel 2:44",
+				"accesor": "dani-2-44"
+			},
+			{
+				"displayName": "Juan 3:16",
+				"accesor": "juan-3-16"
+			},
+			{
+				"displayName": "Juan 17:3",
+				"accesor": "juan-17-3"
+			}
+		]
+	},
+	{
+		"displayName": "Dios y la ciencia",
+		"verses": [
+			{
+				"displayName": "Job 26:7",
+				"accesor": "job-26-7"
+			},
+			{
+				"displayName": "Isaías 40:22",
+				"accesor": "isai-40-22"
+			},
+			{
+				"displayName": "Hebreos 3:4",
+				"accesor": "hebr-3-4"
+			},
+			{
+				"displayName": "Amós 9:6",
+				"accesor": "amos-9-6"
+			},
+			{
+				"displayName": "Números 19:16",
+				"accesor": "nume-19-16"
+			},
+			{
+				"displayName": "Jeremías 25:12",
+				"accesor": "jere-25-12"
+			}
+		]
+	},
+	{
+		"displayName": "Paraíso en la Tierra",
+		"verses": [
+			{
+				"displayName": "Génesis 1:28",
+				"accesor": "gene-1-28"
+			},
+			{
+				"displayName": "Isaías 55:11",
+				"accesor": "isai-55-11"
+			},
+			{
+				"displayName": "Salmo 37:10, 11",
+				"accesor": "salm-37-10:11"
+			},
+			{
+				"displayName": "2 Pedro 3:13",
+				"accesor": "2ped-3-13"
+			},
+			{
+				"displayName": "Revelación 5:10",
+				"accesor": "reve-5-10"
+			},
+			{
+				"displayName": "Revelación 11:18",
+				"accesor": "reve-11-18"
+			},
+			{
+				"displayName": "Revelación 21:3, 4",
+				"accesor": "reve-21-3:4"
+			},
+			{
+				"displayName": "Juan 17:3",
 				"accesor": "juan-17-3"
 			}
 		]
