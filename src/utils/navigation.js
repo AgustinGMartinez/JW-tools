@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { Keyboard } from 'react-native';
 import { initRootNavigation as irn } from '../screens/index';
+import { MAIN_COLOR } from './constants';
 
 export const initRootNavigation = irn;
 
@@ -28,7 +29,7 @@ export const pushView = function({
 						color: 'white',
 					},
 					background: {
-						color: '#5B3C88',
+						color: MAIN_COLOR,
 					},
 					backButton: {
 						color: 'white',

@@ -3,6 +3,7 @@ import { Navigation } from 'react-native-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Provider } from 'react-redux';
 import configureStore from '../store/configureStore';
+import { MAIN_COLOR } from '../utils/constants';
 
 const store = configureStore();
 
@@ -33,6 +34,12 @@ export function registerScreens() {
 	Navigation.registerComponent('jw-tools.Settings', () =>
 		withRedux(require('./Settings/Settings').default)
 	);
+	Navigation.registerComponent('jw-tools.Truths', () =>
+		withRedux(require('./Truths/Truths').default)
+	);
+	Navigation.registerComponent('jw-tools.Teaching', () =>
+		withRedux(require('./Teaching/Teaching').default)
+	);
 }
 
 export function initRootNavigation({ screenId, title }) {
@@ -55,7 +62,7 @@ export function initRootNavigation({ screenId, title }) {
 													fontWeight: 'bold',
 												},
 												background: {
-													color: '#5B3C88',
+													color: MAIN_COLOR,
 												},
 											},
 										},
@@ -78,7 +85,7 @@ export function initRootNavigation({ screenId, title }) {
 													color: 'white',
 												},
 												background: {
-													color: '#5B3C88',
+													color: MAIN_COLOR,
 												},
 												leftButtons: [
 													{

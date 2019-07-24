@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Item, Input, Icon, Button, Text } from 'native-base';
 import { StyleSheet } from 'react-native';
+import { MAIN_COLOR } from '../../utils/constants';
 
 class SearchBar extends React.PureComponent {
 	render() {
@@ -24,7 +25,7 @@ class SearchBar extends React.PureComponent {
 
 const s = StyleSheet.create({
 	header: {
-		backgroundColor: '#5B3C88',
+		backgroundColor: MAIN_COLOR,
 	},
 });
 

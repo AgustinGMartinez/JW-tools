@@ -3,6 +3,7 @@ import HorizontalLazyPagination from '../UI/HorizontalLazyPagination';
 import BibleChapter from './Chapter';
 import { Spinner } from 'native-base';
 import { Navigation } from 'react-native-navigation';
+import { MAIN_COLOR } from '../../utils/constants';
 
 class BibleCombos extends React.Component {
 	changeTopBarName = (title, subtitle = undefined) => {
@@ -26,7 +27,7 @@ class BibleCombos extends React.Component {
 				renderRow={item => (
 					<BibleChapter key={item.accesor} id={item.accesor} />
 				)}
-				loader={<Spinner color={'#5B3C88'} />}
+				loader={<Spinner color={MAIN_COLOR} />}
 				numberOfRenderedViews={3}
 				onReleaseDragTouch={(data, index) => {
 					let [bookAndChap, verses] = data[index].displayName.split(':');

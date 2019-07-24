@@ -1,3 +1,7 @@
+// misc
+export const MAIN_COLOR = '#5B3C88';
+
+// storage
 export const STORAGE_FONTSIZE = 'STORAGE_FONTSIZE';
 
 // actions

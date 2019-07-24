@@ -3,6 +3,7 @@ import bible from '../../utils/bible';
 import { Container, Text, Spinner } from 'native-base';
 import { StyleSheet, View, ScrollView, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import { MAIN_COLOR } from '../../utils/constants';
 
 /**
  * THIS COMPONENT MUST BE CALLED WITH THE PROP ID, WHICH CAN BE '19-1-1' || '19-1-1:3' || '19-1'
@@ -165,7 +166,7 @@ class Chapter extends React.PureComponent {
 							<Text>{displayContentHalf2}</Text>
 						</>
 					) : (
-						<Spinner color={'#5B3C88'} />
+						<Spinner color={MAIN_COLOR} />
 					)}
 				</ScrollView>
 			</Container>
@@ -182,12 +183,12 @@ const s = StyleSheet.create({
 		width: Dimensions.get('window').width,
 	},
 	chapterNumber: {
-		color: '#5B3C88',
+		color: MAIN_COLOR,
 		fontWeight: '500',
 		fontSize: 30,
 	},
 	verseNumber: {
-		color: '#5B3C88',
+		color: MAIN_COLOR,
 		fontWeight: '500',
 		fontSize: 23,
 	},

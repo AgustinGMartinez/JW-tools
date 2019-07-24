@@ -6,6 +6,7 @@ import SearchResultInfo from '../Views/SearchResultInfo';
 import { Content, Container, Spinner, Text } from 'native-base';
 import { Image, StyleSheet, View, FlatList } from 'react-native';
 import { withMenuButton, pushView } from '../../utils/navigation';
+import { MAIN_COLOR } from '../../utils/constants';
 
 class SearchBarContainer extends React.PureComponent {
 	state = {
@@ -61,7 +62,7 @@ class SearchBarContainer extends React.PureComponent {
 					contentContainerStyle={!loading && results.length ? [] : s.content}
 				>
 					{loading ? (
-						<Spinner color={'#5B3C88'} />
+						<Spinner color={MAIN_COLOR} />
 					) : results.length ? (
 						<>
 							<SearchResultInfo total={total} />
@@ -71,7 +72,7 @@ class SearchBarContainer extends React.PureComponent {
 									<SearchResult result={item.item} open={this.openInBible} />
 								)}
 								keyExtractor={result => result.map}
-								// ListFooterComponent={<Spinner color={'#5B3C88'} />}
+								// ListFooterComponent={<Spinner color={MAIN_COLOR} />}
 							/>
 						</>
 					) : touched ? (

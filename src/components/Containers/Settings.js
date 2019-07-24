@@ -29,12 +29,6 @@ class Settings extends React.Component {
 								min={14}
 								max={30}
 								step={2}
-								touchDimensions={{
-									height: 70, // era 50
-									width: 70, // era 50
-									borderRadius: 15,
-									slipDisplacement: 200,
-								}}
 							/>
 						</Right>
 					</ListItem>

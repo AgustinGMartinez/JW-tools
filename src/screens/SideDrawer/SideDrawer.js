@@ -18,6 +18,10 @@ class SideDrawer extends React.Component {
 				this.openView('jw-tools.Settings', 'Configuración');
 				break;
 
+			case 'truths':
+				this.openView('jw-tools.Truths', 'Verdades');
+				break;
+
 			default:
 				break;
 		}
@@ -35,7 +39,7 @@ class SideDrawer extends React.Component {
 						<ListItem onPress={() => this.changeView('home')}>
 							<Text>Inicio</Text>
 						</ListItem>
-						<ListItem>
+						<ListItem onPress={() => this.changeView('truths')}>
 							<Text>Verdades</Text>
 						</ListItem>
 						<ListItem>
