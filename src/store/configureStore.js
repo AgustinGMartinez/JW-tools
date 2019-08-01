@@ -2,10 +2,11 @@ import { combineReducers, applyMiddleware, compose, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import logger from 'redux-logger';
 import settings from './reducers/settings';
+import navigation from './reducers/navigation';
 import { AsyncStorage } from 'react-native';
 import { STORAGE_FONTSIZE, SET_GLOBAL_FONTSIZE } from '../utils/constants';
 
-const reducers = combineReducers({ settings });
+const reducers = combineReducers({ settings, navigation });
 
 const composeEnhancers = __DEV__
 	? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

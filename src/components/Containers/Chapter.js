@@ -4,6 +4,7 @@ import { Container, Text, Spinner } from 'native-base';
 import { StyleSheet, View, ScrollView, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { MAIN_COLOR } from '../../utils/constants';
+import { trimEnd } from '../../utils/trimEnd';
 
 /**
  * THIS COMPONENT MUST BE CALLED WITH THE PROP ID, WHICH CAN BE '19-1-1' || '19-1-1:3' || '19-1'
@@ -108,7 +109,7 @@ class Chapter extends React.PureComponent {
 								<Text style={[verseContentStyling, s.highlighted]}>
 									{/* trim the last highlighted text, because the view hack already jumps to a new line */}
 									{highlightVerses.slice(-1)[0] === index
-										? text.slice(index < 10 ? 3 : 4).trim()
+										? trimEnd(text.slice(index < 10 ? 3 : 4))
 										: text.slice(index < 10 ? 3 : 4)}
 								</Text>
 							</Text>
@@ -127,7 +128,7 @@ class Chapter extends React.PureComponent {
 							<Text style={verseContentStyling}>
 								{/* if it's the verse right before the highlighted ones, trim because the view hack already jumps to a new line */}
 								{highlightVerses[0] - index === 1
-									? text.slice(2).trim()
+									? trimEnd(text.slice(2))
 									: text.slice(2)}
 							</Text>
 						</Text>

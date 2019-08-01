@@ -4,12 +4,35 @@ import { Container, Content, ListItem, Body, Right } from 'native-base';
 import MultiSlider from 'react-native-range';
 import { connect } from 'react-redux';
 import { setFontSize } from '../../actions/settingsActions';
-import { withMenuButton } from '../../utils/navigation';
+import { withMenuButtons } from '../../utils/navigation';
+import { MAIN_COLOR } from '../../utils/constants';
 
 class Settings extends React.Component {
+	static options(props) {
+		return {
+			topBar: {
+				title: {
+					text: 'Configuración',
+					color: 'white',
+				},
+				background: {
+					color: MAIN_COLOR,
+				},
+				leftButtons: [
+					{
+						id: 'sideMenuButton',
+						icon: props.menuIcon,
+						color: 'white',
+					},
+				],
+			},
+		};
+	}
+
 	changeFontSizeValue = value => {
 		this.props.setFontSize(value);
 	};
+
 	render() {
 		const { fontSize } = this.props;
 		return (
@@ -46,7 +69,7 @@ const mapActionsToProps = dispatch => ({
 	setFontSize: size => dispatch(setFontSize(size)),
 });
 
-export default withMenuButton(
+export default withMenuButtons({ bibleIcon: true, menuIcon: true })(
 	connect(
 		mapStateToProps,
 		mapActionsToProps

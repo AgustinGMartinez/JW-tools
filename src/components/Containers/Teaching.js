@@ -23,6 +23,7 @@ class Teaching extends React.Component {
 			title: readble.split(':')[0],
 			passProps: props,
 			componentId: this.props.componentId,
+			withChapterButton: true,
 		});
 	};
 
@@ -38,21 +39,23 @@ class Teaching extends React.Component {
 							</CardItem>
 							<CardItem style={s.cardBody}>
 								<Body>
-									<View style={s.versesList}>
-										{content.verses.map((verse, index) => (
-											<TouchableNativeFeedback
-												key={verse.map}
-												onPress={() =>
-													this.openInBible(verse.map, verse.display)
-												}
-											>
-												<Text style={s.verse}>
-													{verse.display}
-													{index + 1 !== content.verses.length ? ', ' : null}
-												</Text>
-											</TouchableNativeFeedback>
-										))}
-									</View>
+									{content.verses && content.verses.length && (
+										<View style={s.versesList}>
+											{content.verses.map((verse, index) => (
+												<TouchableNativeFeedback
+													key={verse.map}
+													onPress={() =>
+														this.openInBible(verse.map, verse.display)
+													}
+												>
+													<Text style={s.verse}>
+														{verse.display}
+														{index + 1 !== content.verses.length ? ', ' : null}
+													</Text>
+												</TouchableNativeFeedback>
+											))}
+										</View>
+									)}
 									<Text>{content.argument}</Text>
 								</Body>
 							</CardItem>

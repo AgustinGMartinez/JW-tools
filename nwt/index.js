@@ -333,8 +333,10 @@ const bookNames = [
 
 exports.getBook = function(numberOrAbbr) {
 	if (!isNaN(Number(numberOrAbbr))) {
+		// is number
 		return bible.get(Number(numberOrAbbr));
 	} else {
+		// is abbreviation
 		return bible.get(abbreviations.indexOf(numberOrAbbr) + 1);
 	}
 };

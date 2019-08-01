@@ -12,12 +12,39 @@ import {
 	Spinner,
 } from 'native-base';
 import combos from '../../data/preaching.json';
-import { withMenuButton } from '../../utils/navigation';
-import BibleChapter from './Chapter';
-import HorizontalLazyPagination from '../UI/HorizontalLazyPagination';
+import { withMenuButtons } from '../../utils/navigation';
 import { pushView } from '../../utils/navigation';
+import { MAIN_COLOR } from '../../utils/constants';
 
 class Preaching extends React.PureComponent {
+	static options(props) {
+		return {
+			topBar: {
+				title: {
+					text: 'Para predicar',
+					color: 'white',
+				},
+				background: {
+					color: MAIN_COLOR,
+				},
+				leftButtons: [
+					{
+						id: 'sideMenuButton',
+						icon: props.menuIcon,
+						color: 'white',
+					},
+				],
+				rightButtons: [
+					{
+						id: 'bibleButton',
+						icon: props.bibleIcon,
+						color: 'white',
+					},
+				],
+			},
+		};
+	}
+
 	openCombos = verses => {
 		pushView({
 			screenId: 'jw-tools.BibleCombos',
@@ -27,6 +54,7 @@ class Preaching extends React.PureComponent {
 			title: verses[0].displayName.split(':')[0],
 			subtitle: verses[0].displayName.split(':')[1],
 			componentId: this.props.componentId,
+			withChapterButton: true,
 		});
 	};
 
@@ -59,4 +87,4 @@ class Preaching extends React.PureComponent {
 	}
 }
 
-export default withMenuButton(Preaching);
+export default withMenuButtons({ bibleIcon: true, menuIcon: true })(Preaching);

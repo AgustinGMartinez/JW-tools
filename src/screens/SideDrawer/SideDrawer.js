@@ -1,25 +1,38 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Content, View, ListItem, Text } from 'native-base';
-import { initRootNavigation } from '../../utils/navigation';
+import { setStackRoot } from '../../utils/navigation';
+import { connect } from 'react-redux';
 
 class SideDrawer extends React.Component {
 	changeView = id => {
 		switch (id) {
 			case 'home':
-				this.openView('jw-tools.Search', 'Inicio');
+				this.openView('jw-tools.Search', true, true);
 				break;
 
 			case 'preaching':
-				this.openView('jw-tools.Preaching', 'Para predicar');
+				this.openView('jw-tools.Preaching', true, true);
 				break;
 
 			case 'settings':
-				this.openView('jw-tools.Settings', 'Configuración');
+				this.openView('jw-tools.Settings', true);
 				break;
 
 			case 'truths':
-				this.openView('jw-tools.Truths', 'Verdades');
+				this.openView('jw-tools.Truths', true);
+				break;
+
+			case 'principles':
+				this.openView('jw-tools.Principles', true);
+				break;
+
+			case 'lessons':
+				this.openView('jw-tools.Lessons', true);
+				break;
+
+			case 'bible':
+				this.openView('jw-tools.Bible', true);
 				break;
 
 			default:
@@ -27,8 +40,14 @@ class SideDrawer extends React.Component {
 		}
 	};
 
-	openView = (screenId, title) => {
-		initRootNavigation({ screenId, title });
+	openView = (screenId, withMenuButton = false, withBibleButton = false) => {
+		const { openerId } = this.props;
+		setStackRoot({
+			screenId,
+			withBibleButton,
+			withMenuButton,
+			stackId: openerId,
+		});
 	};
 
 	render() {
@@ -39,13 +58,16 @@ class SideDrawer extends React.Component {
 						<ListItem onPress={() => this.changeView('home')}>
 							<Text>Inicio</Text>
 						</ListItem>
+						<ListItem onPress={() => this.changeView('bible')}>
+							<Text>Biblia</Text>
+						</ListItem>
 						<ListItem onPress={() => this.changeView('truths')}>
 							<Text>Verdades</Text>
 						</ListItem>
-						<ListItem>
+						<ListItem onPress={() => this.changeView('principles')}>
 							<Text>Principios</Text>
 						</ListItem>
-						<ListItem>
+						<ListItem onPress={() => this.changeView('lessons')}>
 							<Text>Lecciones</Text>
 						</ListItem>
 						<ListItem onPress={() => this.changeView('preaching')}>
@@ -69,4 +91,8 @@ class SideDrawer extends React.Component {
 
 const s = StyleSheet.create({});
 
-export default SideDrawer;
+const mapStateToProps = state => ({
+	openerId: state.navigation.openerId,
+});
+
+export default connect(mapStateToProps)(SideDrawer);

@@ -8,16 +8,16 @@ import {
 	ListItem,
 	Icon,
 } from 'native-base';
-import truths from '../../data/truths.json';
+import lessons from '../../data/lessons.json';
 import { pushView, withMenuButtons } from '../../utils/navigation';
 import { MAIN_COLOR } from '../../utils/constants';
 
-class Truths extends React.Component {
+class Lessons extends React.Component {
 	static options(props) {
 		return {
 			topBar: {
 				title: {
-					text: 'Verdades',
+					text: 'Lecciones',
 					color: 'white',
 				},
 				background: {
@@ -47,7 +47,7 @@ class Truths extends React.Component {
 		return (
 			<Container>
 				<Content>
-					{truths.map((truth, index) => (
+					{lessons.map((truth, index) => (
 						<ListItem key={index} icon onPress={() => this.openTeaching(truth)}>
 							<Body>
 								<Text>{truth.displayName}</Text>
@@ -63,4 +63,4 @@ class Truths extends React.Component {
 	}
 }
 
-export default withMenuButtons({ bibleIcon: true, menuIcon: true })(Truths);
+export default withMenuButtons({ bibleIcon: true, menuIcon: true })(Lessons);

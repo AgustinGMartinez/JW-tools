@@ -7,12 +7,16 @@ import { MAIN_COLOR } from '../utils/constants';
 
 const store = configureStore();
 
-const withRedux = Component => props => {
-	return (
-		<Provider store={store}>
-			<Component {...props} />
-		</Provider>
-	);
+const withRedux = Component => {
+	const wrapper = props => {
+		return (
+			<Provider store={store}>
+				<Component {...props} />
+			</Provider>
+		);
+	};
+	wrapper.options = Component.options;
+	return wrapper;
 };
 
 export function registerScreens() {
@@ -40,10 +44,23 @@ export function registerScreens() {
 	Navigation.registerComponent('jw-tools.Teaching', () =>
 		withRedux(require('./Teaching/Teaching').default)
 	);
+	Navigation.registerComponent('jw-tools.Principles', () =>
+		withRedux(require('./Principles/Principles').default)
+	);
+	Navigation.registerComponent('jw-tools.Lessons', () =>
+		withRedux(require('./Lessons/Lessons').default)
+	);
 }
 
-export function initRootNavigation({ screenId, title }) {
-	Promise.all([Icon.getImageSource('ios-menu', 30)]).then(([menuIcon]) => {
+export function initRootNavigation({
+	screenId,
+	withBibleButton,
+	withMenuButton,
+}) {
+	Promise.all([
+		withMenuButton ? Icon.getImageSource('ios-menu', 30) : null,
+		withBibleButton ? Icon.getImageSource('ios-book', 30) : null,
+	]).then(([menuIcon, bibleIcon]) => {
 		Navigation.setRoot({
 			root: {
 				sideMenu: {
@@ -73,28 +90,13 @@ export function initRootNavigation({ screenId, title }) {
 					},
 					center: {
 						stack: {
-							// stacks, the last one is the current page for this stack
 							children: [
 								{
 									component: {
 										name: screenId,
-										options: {
-											topBar: {
-												title: {
-													text: title,
-													color: 'white',
-												},
-												background: {
-													color: MAIN_COLOR,
-												},
-												leftButtons: [
-													{
-														id: 'sideMenuButton',
-														icon: menuIcon,
-														color: 'white',
-													},
-												],
-											},
+										passProps: {
+											menuIcon,
+											bibleIcon,
 										},
 									},
 								},
@@ -105,4 +107,17 @@ export function initRootNavigation({ screenId, title }) {
 			},
 		});
 	});
+
+	// so it's smooth but only after startup
+	// Navigation.setDefaultOptions({
+	// 	animations: {
+	// 		setRoot: {
+	// 			alpha: {
+	// 				from: 0,
+	// 				to: 1,
+	// 				duration: 500,
+	// 			},
+	// 		},
+	// 	},
+	// });
 }

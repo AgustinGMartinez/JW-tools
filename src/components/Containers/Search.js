@@ -5,10 +5,38 @@ import SearchResult from '../Views/SearchResult';
 import SearchResultInfo from '../Views/SearchResultInfo';
 import { Content, Container, Spinner, Text } from 'native-base';
 import { Image, StyleSheet, View, FlatList } from 'react-native';
-import { withMenuButton, pushView } from '../../utils/navigation';
+import { withMenuButtons, pushView, Navigation } from '../../utils/navigation';
 import { MAIN_COLOR } from '../../utils/constants';
 
 class SearchBarContainer extends React.PureComponent {
+	static options(props) {
+		return {
+			topBar: {
+				title: {
+					text: 'Inicio',
+					color: 'white',
+				},
+				background: {
+					color: MAIN_COLOR,
+				},
+				leftButtons: [
+					{
+						id: 'sideMenuButton',
+						icon: props.menuIcon,
+						color: 'white',
+					},
+				],
+				rightButtons: [
+					{
+						id: 'bibleButton',
+						icon: props.bibleIcon,
+						color: 'white',
+					},
+				],
+			},
+		};
+	}
+
 	state = {
 		searchValue: '',
 		searchResults: { results: [], total: 0 },
@@ -37,6 +65,7 @@ class SearchBarContainer extends React.PureComponent {
 			title: readble.split(':')[0],
 			passProps: props,
 			componentId: this.props.componentId,
+			withChapterButton: true,
 		});
 	};
 
@@ -110,4 +139,6 @@ const s = StyleSheet.create({
 	noResults: {},
 });
 
-export default withMenuButton(SearchBarContainer);
+export default withMenuButtons({ bibleIcon: true, menuIcon: true })(
+	SearchBarContainer
+);

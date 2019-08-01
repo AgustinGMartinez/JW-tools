@@ -1,0 +1,44 @@
+[
+	{
+		"displayName": "El nombre de Dios",
+		"content": [
+			{
+				"title": "Su nombre es Jehová",
+				"verses": [
+					{
+						"display": "Génesis 1:33",
+						"map": "gene-1-1:23"
+					}
+				],
+				"argument": "Fijese en lo que dice el versiculo. Su nombre es Jehová, y Él SOLO es el altisimo sobre toda la tierra. Nadie más."
+			},
+			{
+				"title": "Su abreviación es Jah",
+				"verses": [
+					{
+						"display": "Génesis 1:33",
+						"map": "gene-1-1:23"
+					},
+					{
+						"display": "Génesis 1:2",
+						"map": "gene-1-1:2"
+					}
+				],
+				"argument": "Es su abreviación. Fijese en lo que dice el versiculo. Su nombre es Jehová, y Él SOLO es el altisimo sobre toda la tierra. Nadie más. Es su abreviación. Fijese en lo que dice el versiculo. Su nombre es Jehová, y Él SOLO es el altisimo sobre toda la tierra. Nadie más. Es su abreviación. Fijese en lo que dice el versiculo. Su nombre es Jehová, y Él SO\nLO es el altisimo sobre toda la tierra. Nadie más. Es su abreviación. Fijese en lo que dice el versiculo. Su nombre es Jehová, y Él SOLO es el altisimo sobre toda la tierra. Nadie más."
+			}
+		]
+	},
+	{
+		"displayName": "Quién es Jesus",
+		"content": [
+			{
+				"title": "Su nombre es Jehová",
+				"verse": {
+					"display": "Génesis 1:28, 29",
+					"map": "gene-1-28:29"
+				},
+				"argument": "Fijese en lo que dice el versiculo. Su nombre es Jehová, y Él SOLO es el altisimo sobre toda la tierra. Nadie más."
+			}
+		]
+	}
+]
