@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bible search correctly searches only one word 1`] = `
+Array [
+  Object {
+    "map": "2-15-2",
+    "readble": "Éxodo 15:2",
+    "value": " 2  Mi fuerza y mi poder es Jah, pues él se ha convertido en mi salvación.
+Este es mi Dios, y yo lo alabaré. Es el Dios de mi padre, y yo lo ensalzaré. 
+",
+  },
+  Object {
+    "map": "2-17-16",
+    "readble": "Éxodo 17:16",
+    "value": "16  cuando dijo: “Por alzar la mano contra el trono de Jah, Jehová estará en guerra con los amalequitas generación tras generación”.",
+  },
+  Object {
+    "map": "19-68-4",
+    "readble": "Salmos 68:4",
+    "value": " 4  Cántenle a Dios; cántenle alabanzas a su nombre.
+Cántenle al que cabalga por las llanuras desérticas.
+¡Jah es su nombre! ¡Alégrense delante de él!
+",
+  },
+]
+`;
+
+exports[`bible search searches a single word 1`] = `
+Array [
+  Object {
+    "map": "9-14-33",
+    "readble": "1 Samuel 14:33",
+    "value": "33  De modo que le informaron a Saúl: “Mira, los hombres están pecando contra Jehová: se están comiendo la carne con la sangre”. Y él dijo: “Ustedes han sido desleales. Rápido, hagan rodar hasta aquí una piedra grande”.",
+  },
+  Object {
+    "map": "23-63-8",
+    "readble": "Isaías 63:8",
+    "value": " 8  Porque él dijo: “Ellos de verdad son mi pueblo, hijos que no serán desleales”.
+De modo que él se convirtió en su Salvador. 
+",
+  },
+  Object {
+    "map": "54-1-9",
+    "readble": "1 Timoteo 1:9",
+    "value": "9  y se reconoce que la ley no se establece para el justo, sino para los que violan la ley y los rebeldes, los irreverentes y los pecadores, los desleales y los que profanan las cosas sagradas, los que matan a sus padres y los que matan a sus madres, los asesinos,",
+  },
+  Object {
+    "map": "55-3-2",
+    "readble": "2 Timoteo 3:2",
+    "value": "2  Porque la gente solo se amará a sí misma; serán amantes del dinero, fanfarrones, arrogantes, blasfemos, desobedientes a los padres, desagradecidos y desleales,",
+  },
+  Object {
+    "map": "65-1-4",
+    "readble": "Judas 1:4",
+    "value": "4  La razón es que entre ustedes se han metido disimuladamente algunos hombres que hace mucho tiempo fueron señalados por las Escrituras para su condena. Son hombres irreverentes, que convierten la bondad inmerecida de nuestro Dios en una excusa para su conducta descarada y que son desleales a nuestro único dueño y Señor, Jesucristo.
+",
+  },
+]
+`;
+
+exports[`bible search searches ignoring double spaces, commas and other non-word characters 1`] = `Array []`;
+
+exports[`bible search searches through at least 2 verses 1`] = `Array []`;
+
+exports[`bible search searches with exact order and no order in priorities 1`] = `
+Array [
+  Object {
+    "map": "1-1-3",
+    "readble": "Génesis 1:3",
+    "value": "3  Y Dios dijo: “Que haya luz”. Así que hubo luz.",
+  },
+  Object {
+    "map": "1-1-9",
+    "readble": "Génesis 1:9",
+    "value": "9  Entonces Dios dijo: “Que las aguas que están debajo de los cielos se junten en un mismo lugar y aparezca el suelo seco”. Y así ocurrió.",
+  },
+  Object {
+    "map": "1-1-11",
+    "readble": "Génesis 1:11",
+    "value": "11  Entonces Dios dijo: “Que la tierra produzca hierba, plantas con semilla y árboles frutales según sus géneros, y que den fruto y semilla”. Y así ocurrió.",
+  },
+  Object {
+    "map": "1-1-21",
+    "readble": "Génesis 1:21",
+    "value": "21  Así que Dios creó los grandes animales marinos y todos los seres vivos que se mueven y enjambran en las aguas según sus géneros, y todos los animales con alas que vuelan según sus géneros. Y Dios vio que esto era bueno.",
+  },
+  Object {
+    "map": "1-1-22",
+    "readble": "Génesis 1:22",
+    "value": "22  Luego Dios los bendijo así: “Reprodúzcanse, sean muchos y llenen los mares. Y que los animales voladores se multipliquen en la tierra”.",
+  },
+]
+`;
+
+exports[`bible search searches with filters 1`] = `
+Array [
+  Object {
+    "map": "64-1-6",
+    "readble": "3 Juan 1:6",
+    "value": "6  Ellos han hablado de tu amor delante de la congregación. Por favor, ayúdalos con lo que necesiten para su viaje y hazlo de una manera que agrade a Dios.",
+  },
+  Object {
+    "map": "64-1-11",
+    "readble": "3 Juan 1:11",
+    "value": "11  Amado, no imites lo malo, sino lo bueno. El que hace el bien proviene de Dios. El que hace el mal no ha visto a Dios.",
+  },
+  Object {
+    "map": "65-1-1",
+    "readble": "Judas 1:1",
+    "value": "1  De Judas, esclavo de Jesucristo y hermano de Santiago, a los llamados que son amados por Dios el Padre y que han sido guardados para Jesucristo:
+",
+  },
+  Object {
+    "map": "65-1-4",
+    "readble": "Judas 1:4",
+    "value": "4  La razón es que entre ustedes se han metido disimuladamente algunos hombres que hace mucho tiempo fueron señalados por las Escrituras para su condena. Son hombres irreverentes, que convierten la bondad inmerecida de nuestro Dios en una excusa para su conducta descarada y que son desleales a nuestro único dueño y Señor, Jesucristo.
+",
+  },
+  Object {
+    "map": "65-1-21",
+    "readble": "Judas 1:21",
+    "value": "21  para mantenerse en el amor de Dios, mientras esperan la misericordia de nuestro Señor Jesucristo con miras a la vida eterna.",
+  },
+  Object {
+    "map": "65-1-25",
+    "readble": "Judas 1:25",
+    "value": "25  al único Dios, nuestro Salvador, mediante Jesucristo nuestro Señor, vayan la gloria, la majestad, el poder y la autoridad por toda la eternidad: antes, ahora y por siempre. Amén.",
+  },
+]
+`;
+
+exports[`bible search searches without accents 1`] = `
+Array [
+  Object {
+    "map": "1-2-4",
+    "readble": "Génesis 2:4",
+    "value": "4  Esta es la historia de los cielos y la tierra en el tiempo en que fueron creados, en el día en que Jehová Dios hizo el cielo y la tierra.
+",
+  },
+]
+`;
+
+exports[`getter correctly gets a range map 1`] = `
+Map {
+  44 => "44  ”En los días de esos reyes, el Dios del cielo establecerá un reino que nunca será destruido ni pasará a manos de ningún otro pueblo. Este reino hará añicos y pondrá fin a todos esos reinos, y será el único que permanecerá para siempre,",
+  45 => "45  tal como viste que pasaba cuando se cortó una piedra de la montaña, aunque no con manos humanas, y la piedra hizo añicos el hierro, el cobre, el barro, la plata y el oro. El Gran Dios le ha revelado al rey lo que sucederá en el futuro. El sueño es verdadero y su interpretación es digna de confianza”.
+",
+}
+`;
+
+exports[`getter gets books correctly with abbreviation 1`] = `"44  ”En los días de esos reyes, el Dios del cielo establecerá un reino que nunca será destruido ni pasará a manos de ningún otro pueblo. Este reino hará añicos y pondrá fin a todos esos reinos, y será el único que permanecerá para siempre,45  tal como viste que pasaba cuando se cortó una piedra de la montaña, aunque no con manos humanas, y la piedra hizo añicos el hierro, el cobre, el barro, la plata y el oro. El Gran Dios le ha revelado al rey lo que sucederá en el futuro. El sueño es verdadero y su interpretación es digna de confianza”."`;
+
+exports[`getter gets books correctly with number 1`] = `"44  ”En los días de esos reyes, el Dios del cielo establecerá un reino que nunca será destruido ni pasará a manos de ningún otro pueblo. Este reino hará añicos y pondrá fin a todos esos reinos, y será el único que permanecerá para siempre,45  tal como viste que pasaba cuando se cortó una piedra de la montaña, aunque no con manos humanas, y la piedra hizo añicos el hierro, el cobre, el barro, la plata y el oro. El Gran Dios le ha revelado al rey lo que sucederá en el futuro. El sueño es verdadero y su interpretación es digna de confianza”."`;

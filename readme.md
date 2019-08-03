@@ -10,10 +10,10 @@ nill
 
 ## Upcoming features:
 
-- biblia
 - agregar filtros a la busqueda (front end)
+- En los capitulos poder deslizarse hacia los lados
+- hacer seccion mis archivos
 - agregar opcion de buscar en biblia vieja simultaneamente
-- hacer demas secciones
 - splash screen
 
 ## pasos para que ande por si solo:

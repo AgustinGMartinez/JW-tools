@@ -6,6 +6,7 @@ import { MAIN_COLOR } from './constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { setOpenerId } from '../actions/navigationActions';
+import bible from './bible';
 
 export { Navigation };
 
@@ -18,14 +19,21 @@ export const pushView = function({
 	componentId,
 	subtitle = undefined,
 	withBibleButton = false,
-	withChapterButton = false,
+	withBookButton = false,
+	withMenuButton = false,
+	hideBackButton = false,
 }) {
 	Keyboard.dismiss();
-	if (withBibleButton || withChapterButton) {
-		Icon.getImageSource('ios-book', 30).then(push);
-	} else push();
+	if (withBibleButton || withBookButton || withMenuButton) {
+		Promise.all([
+			withMenuButton ? Icon.getImageSource('ios-menu', 30) : null,
+			withBibleButton || withBookButton
+				? Icon.getImageSource('ios-book', 30)
+				: null,
+		]).then(push);
+	} else push([]);
 
-	function push(bibleIcon = null) {
+	function push([menuIcon, bibleIcon]) {
 		Navigation.push(componentId, {
 			component: {
 				name: screenId,
@@ -45,8 +53,19 @@ export const pushView = function({
 						},
 						backButton: {
 							color: 'white',
-							visible: true,
+							visible: !hideBackButton, // actually is always hidden if there are leftButtons
 						},
+						leftButtons: [
+							...(withMenuButton
+								? [
+										{
+											id: 'sideMenuButton',
+											icon: menuIcon,
+											color: 'white',
+										},
+								  ]
+								: []),
+						],
 						rightButtons: [
 							...(withBibleButton
 								? [
@@ -57,10 +76,10 @@ export const pushView = function({
 										},
 								  ]
 								: []),
-							...(withChapterButton
+							...(withBookButton
 								? [
 										{
-											id: 'chapterButton',
+											id: 'bookButton',
 											icon: bibleIcon,
 											color: 'white',
 										},
@@ -130,6 +149,9 @@ export const withMenuButtons = function(options) {
 					this.navigationEventListener = Navigation.events().bindComponent(
 						this
 					);
+				}
+
+				componentDidAppear() {
 					this.props.setOpenerId(this.props.componentId);
 				}
 
@@ -149,11 +171,21 @@ export const withMenuButtons = function(options) {
 							},
 						});
 					} else if (buttonId === 'bibleButton') {
-						console.warn('1');
-						// pushView({ screenId: 'jw-tools.Bible' });
-					} else if (buttonId === 'chapterButton') {
-						console.warn(this.state.childData);
-						// pushView({ screenId: 'jw-tools.Bible' });
+						pushView({
+							screenId: 'jw-tools.Bible',
+							componentId: this.props.componentId,
+							withMenuButton: true,
+						});
+					} else if (buttonId === 'bookButton') {
+						const { childData } = this.state;
+						const book = childData.split('-')[0];
+						pushView({
+							screenId: 'jw-tools.Book',
+							passProps: { book },
+							title: bible.getBookDisplayName(book),
+							withBibleButton: true,
+							componentId: this.props.componentId,
+						});
 					}
 				}
 

@@ -54,7 +54,7 @@ class Preaching extends React.PureComponent {
 			title: verses[0].displayName.split(':')[0],
 			subtitle: verses[0].displayName.split(':')[1],
 			componentId: this.props.componentId,
-			withChapterButton: true,
+			withBookButton: true,
 		});
 	};
 

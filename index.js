@@ -6,7 +6,7 @@ registerScreens();
 // Inicializamos este tipo de navegacion
 Navigation.events().registerAppLaunchedListener(() => {
 	initRootNavigation({
-		screenId: 'jw-tools.Search',
+		screenId: 'jw-tools.Bible',
 		withMenuButton: true,
 		withBibleButton: true,
 	});

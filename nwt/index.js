@@ -331,6 +331,75 @@ const bookNames = [
 	'Revelación',
 ];
 
+const displayAbbreviations = [
+	'Gé',
+	'Éx',
+	'Le',
+	'Nú',
+	'Dt',
+	'Jos',
+	'Jue',
+	'Rut',
+	'1Sa',
+	'2Sa',
+	'1Re',
+	'2Re',
+	'1Cr',
+	'2Cr',
+	'Esd',
+	'Ne',
+	'Est',
+	'Job',
+	'Sl',
+	'Pr',
+	'Ec',
+	'Can',
+	'Isa',
+	'Jer',
+	'Lam',
+	'Eze',
+	'Da',
+	'Os',
+	'Joe',
+	'Am',
+	'Abd',
+	'Jon',
+	'Miq',
+	'Na',
+	'Hab',
+	'Sof',
+	'Ag',
+	'Zac',
+	'Mal',
+	'Mt',
+	'Mr',
+	'Lu',
+	'Jn',
+	'Hch',
+	'Ro',
+	'1Co',
+	'2Co',
+	'Gál',
+	'Ef',
+	'Flp',
+	'Col',
+	'1Te',
+	'2Te',
+	'1Ti',
+	'2Ti',
+	'Tit',
+	'Flm',
+	'Heb',
+	'Snt',
+	'1Pe',
+	'2Pe',
+	'1Jn',
+	'2Jn',
+	'3Jn',
+	'Ju',
+	'Rev',
+];
+
 exports.getBook = function(numberOrAbbr) {
 	if (!isNaN(Number(numberOrAbbr))) {
 		// is number
@@ -342,6 +411,29 @@ exports.getBook = function(numberOrAbbr) {
 };
 
 exports.search = bible.search.bind(bible);
+
+exports.getDisplayAbbr = function(numberOrAbbr) {
+	if (!isNaN(Number(numberOrAbbr))) {
+		// is number
+		return displayAbbreviations[Number(numberOrAbbr) - 1];
+	} else {
+		// is abbreviation
+		return displayAbbreviations[abbreviations.indexOf(numberOrAbbr)];
+	}
+};
+
+exports.getBookDisplayName = function(numberOrAbbr) {
+	if (!isNaN(Number(numberOrAbbr))) {
+		// is number
+		return bookNames[Number(numberOrAbbr) - 1];
+	} else {
+		// is abbreviation
+		return bookNames[abbreviations.indexOf(numberOrAbbr)];
+	}
+};
+
+console.log(exports.getDisplayAbbr(5));
+console.log(exports.getDisplayAbbr('file'));
 
 // console.log(exports.search('jah', undefined, 3));
 // console.log(

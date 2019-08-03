@@ -26,7 +26,7 @@ export function registerScreens() {
 	Navigation.registerComponent('jw-tools.Search', () =>
 		withRedux(require('./Search/Search').default)
 	);
-	Navigation.registerComponent('jw-tools.ChapterView', () =>
+	Navigation.registerComponent('jw-tools.Chapter', () =>
 		withRedux(require('./Chapter/Chapter').default)
 	);
 	Navigation.registerComponent('jw-tools.Preaching', () =>
@@ -49,6 +49,12 @@ export function registerScreens() {
 	);
 	Navigation.registerComponent('jw-tools.Lessons', () =>
 		withRedux(require('./Lessons/Lessons').default)
+	);
+	Navigation.registerComponent('jw-tools.Bible', () =>
+		withRedux(require('./Bible/Bible').default)
+	);
+	Navigation.registerComponent('jw-tools.Book', () =>
+		withRedux(require('./Book/Book').default)
 	);
 }
 

@@ -61,11 +61,11 @@ class SearchBarContainer extends React.PureComponent {
 			id: id,
 		};
 		pushView({
-			screenId: 'jw-tools.ChapterView',
+			screenId: 'jw-tools.Chapter',
 			title: readble.split(':')[0],
 			passProps: props,
 			componentId: this.props.componentId,
-			withChapterButton: true,
+			withBookButton: true,
 		});
 	};
 
