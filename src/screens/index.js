@@ -1,11 +1,11 @@
-import React from 'react';
-import { Navigation } from 'react-native-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { Provider } from 'react-redux';
-import configureStore from '../store/configureStore';
-import { MAIN_COLOR } from '../utils/constants';
+import React from 'react'
+import { Navigation } from 'react-native-navigation'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { Provider } from 'react-redux'
+import configureStore from '../store/configureStore'
+import { MAIN_COLOR } from '../utils/constants'
 
-const store = configureStore();
+const store = configureStore()
 
 const withRedux = Component => {
 	const wrapper = props => {
@@ -13,49 +13,55 @@ const withRedux = Component => {
 			<Provider store={store}>
 				<Component {...props} />
 			</Provider>
-		);
-	};
-	wrapper.options = Component.options;
-	return wrapper;
-};
+		)
+	}
+	wrapper.options = Component.options
+	return wrapper
+}
 
 export function registerScreens() {
 	Navigation.registerComponent('jw-tools.SideDrawer', () =>
 		withRedux(require('./SideDrawer/SideDrawer').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Search', () =>
 		withRedux(require('./Search/Search').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Chapter', () =>
 		withRedux(require('./Chapter/Chapter').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Preaching', () =>
 		withRedux(require('./Preaching/Preaching').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.BibleCombos', () =>
 		withRedux(require('./BibleCombos/BibleCombos').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Settings', () =>
 		withRedux(require('./Settings/Settings').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Truths', () =>
 		withRedux(require('./Truths/Truths').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Teaching', () =>
 		withRedux(require('./Teaching/Teaching').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Principles', () =>
 		withRedux(require('./Principles/Principles').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Lessons', () =>
 		withRedux(require('./Lessons/Lessons').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Bible', () =>
 		withRedux(require('./Bible/Bible').default)
-	);
+	)
 	Navigation.registerComponent('jw-tools.Book', () =>
 		withRedux(require('./Book/Book').default)
-	);
+	)
+	Navigation.registerComponent('jw-tools.Topics', () =>
+		withRedux(require('./Topics/Topics').default)
+	)
+	Navigation.registerComponent('jw-tools.Verses', () =>
+		withRedux(require('./Verses/Verses').default)
+	)
 }
 
 export function initRootNavigation({
@@ -111,8 +117,8 @@ export function initRootNavigation({
 					},
 				},
 			},
-		});
-	});
+		})
+	})
 
 	// so it's smooth but only after startup
 	// Navigation.setDefaultOptions({

@@ -1,10 +1,10 @@
-import React from 'react';
-import bible from '../../utils/bible';
-import { Container, Spinner } from 'native-base';
-import { StyleSheet, View, ScrollView, Dimensions, Text } from 'react-native';
-import { connect } from 'react-redux';
-import { MAIN_COLOR } from '../../utils/constants';
-import { trimEnd } from '../../utils/trimEnd';
+import React from 'react'
+import bible from '../../utils/bible'
+import { Container, Spinner } from 'native-base'
+import { StyleSheet, View, ScrollView, Dimensions, Text } from 'react-native'
+import { connect } from 'react-redux'
+import { MAIN_COLOR } from '../../utils/constants'
+import { trimEnd } from '../../utils/trimEnd'
 /**
  * THIS COMPONENT MUST BE CALLED WITH THE PROP ID, WHICH CAN BE '19-1-1' || '19-1-1:3' || '19-1'
  * FOR highlight OF 1 VERSE, OF A RANGE, AND NO highlight RESPECTIVELY
@@ -14,18 +14,18 @@ class Chapter extends React.PureComponent {
 	state = {
 		content: '',
 		highlight: '',
-	};
+	}
 
 	componentWillMount() {
-		const id = this.props.id;
-		let [book, chapter, highlight] = id.split('-');
-		if (highlight) highlight = highlight.split(':').map(Number);
+		const id = this.props.id
+		let [book, chapter, highlight] = id.split('-')
+		if (highlight) highlight = highlight.split(':').map(Number)
 
 		const content = bible
 			.getBook(book)
 			.get(+chapter)
-			.getRangeMap('1-999');
-		this.setState({ content: content, highlight: highlight || '' });
+			.getRangeMap('1-999')
+		this.setState({ content: content, highlight: highlight || '' })
 	}
 
 	onhighlightTextRendered = e => {
@@ -35,50 +35,50 @@ class Chapter extends React.PureComponent {
 					this.content.scrollTo({
 						x: px,
 						y: py - 20, // add a little margin
-					});
+					})
 				}
-			});
+			})
 		}
-	};
+	}
 
 	render() {
-		const { content, highlight } = this.state;
-		const { settingsFontSize, isNested } = this.props;
+		const { content, highlight } = this.state
+		const { settingsFontSize, isNested } = this.props
 		const userFontSize = multiplier => ({
 			fontSize: settingsFontSize * multiplier,
-		});
-		const chapterNumberStyling = [s.chapterNumber, userFontSize(1.5)];
-		const verseNumberStyling = [s.verseNumber, userFontSize(1.15)];
-		const verseContentStyling = [s.verseContent, userFontSize(1)];
+		})
+		const chapterNumberStyling = [s.chapterNumber, userFontSize(1.5)]
+		const verseNumberStyling = [s.verseNumber, userFontSize(1.15)]
+		const verseContentStyling = [s.verseContent, userFontSize(1)]
 
 		// SEPARETED CONTENT FOR THE VIEW HACK
-		const displayContentHalf1 = [];
-		const displayContentHighlighted = [];
-		const displayContentHalf2 = [];
+		const displayContentHalf1 = []
+		const displayContentHighlighted = []
+		const displayContentHalf2 = []
 		// -----------------------------------
 
 		// CALCULATE HIGHLIGHT RANGE
-		const highlightVerses = [];
+		const highlightVerses = []
 		if (highlight) {
-			const highlightVerseFrom = highlight[0];
-			const highlightVerseTo = highlight[1];
+			const highlightVerseFrom = highlight[0]
+			const highlightVerseTo = highlight[1]
 			if (highlightVerseTo) {
-				const difference = highlightVerseTo - highlightVerseFrom;
+				const difference = highlightVerseTo - highlightVerseFrom
 				if (difference === 1) {
 					// no range, just these 2
-					highlightVerses.push(highlightVerseFrom);
-					highlightVerses.push(highlightVerseTo);
+					highlightVerses.push(highlightVerseFrom)
+					highlightVerses.push(highlightVerseTo)
 				} else {
 					// range, push all in bewteen
 					Array(difference + 1)
 						.fill(1)
 						.forEach((_, i) => {
-							highlightVerses.push(highlightVerseFrom + i);
-						});
+							highlightVerses.push(highlightVerseFrom + i)
+						})
 				}
 			} else {
 				// only one verse to highlight
-				highlightVerses.push(highlightVerseFrom);
+				highlightVerses.push(highlightVerseFrom)
 			}
 		}
 
@@ -90,7 +90,7 @@ class Chapter extends React.PureComponent {
 							ref={text => {
 								// save the first one only because we use this to scroll to it
 								if (highlightVerses[0] === index) {
-									this.highlightedText = text;
+									this.highlightedText = text
 								}
 							}}
 							key={index}
@@ -115,7 +115,7 @@ class Chapter extends React.PureComponent {
 								</Text>
 							</Text>
 						</View>
-					);
+					)
 				} else if (!displayContentHighlighted.length) {
 					displayContentHalf1.push(
 						<Text key={index}>
@@ -134,7 +134,7 @@ class Chapter extends React.PureComponent {
 									: text.slice(2)}
 							</Text>
 						</Text>
-					);
+					)
 				} else {
 					displayContentHalf2.push(
 						<Text key={index} style={verseContentStyling}>
@@ -147,9 +147,9 @@ class Chapter extends React.PureComponent {
 							</Text>
 							{text.slice(2)}
 						</Text>
-					);
+					)
 				}
-			});
+			})
 
 		return (
 			<Container>
@@ -176,7 +176,7 @@ class Chapter extends React.PureComponent {
 					)}
 				</ScrollView>
 			</Container>
-		);
+		)
 	}
 }
 
@@ -200,17 +200,18 @@ const s = StyleSheet.create({
 		color: '#000',
 	},
 	highlighted: {
-		backgroundColor: '#feff94',
+		// backgroundColor: '#feff94',
+		backgroundColor: 'transparent',
 	},
 	wrap: {
 		flexDirection: 'row',
 		alignSelf: 'flex-start',
 		flexWrap: 'wrap',
 	},
-});
+})
 
 const mapStateToProps = state => ({
 	settingsFontSize: state.settings.fontSize,
-});
+})
 
-export default connect(mapStateToProps)(Chapter);
+export default connect(mapStateToProps)(Chapter)

@@ -1,3 +1,15 @@
-import { getBook, search, getDisplayAbbr, getBookDisplayName } from '~/nwt';
+import {
+	getBook,
+	search,
+	getDisplayAbbr,
+	getBookDisplayName,
+	getPrettyName,
+} from '~/nwt'
 
-export default { getBook, search, getDisplayAbbr, getBookDisplayName };
+export default {
+	getBook,
+	search,
+	getDisplayAbbr,
+	getBookDisplayName,
+	getPrettyName,
+}

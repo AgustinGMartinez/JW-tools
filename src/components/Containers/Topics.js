@@ -8,16 +8,16 @@ import {
 	ListItem,
 	Icon,
 } from 'native-base'
-import truths from '../../data/truths'
+import topics from '../../data/topics'
 import { pushView, withMenuButtons } from '../../utils/navigation'
 import { MAIN_COLOR } from '../../utils/constants'
 
-class Truths extends React.Component {
+class Topics extends React.Component {
 	static options(props) {
 		return {
 			topBar: {
 				title: {
-					text: 'Verdades',
+					text: 'Temas',
 					color: 'white',
 				},
 				background: {
@@ -34,11 +34,11 @@ class Truths extends React.Component {
 		}
 	}
 
-	openTeaching = content => {
+	openVersesView = topic => {
 		pushView({
-			screenId: 'jw-tools.Teaching',
-			title: content.displayName,
-			passProps: { content },
+			screenId: 'jw-tools.Verses',
+			title: topic.displayName,
+			passProps: { verses: topic.verses },
 			componentId: this.props.componentId,
 		})
 	}
@@ -47,10 +47,14 @@ class Truths extends React.Component {
 		return (
 			<Container>
 				<Content>
-					{truths.map((truth, index) => (
-						<ListItem key={index} icon onPress={() => this.openTeaching(truth)}>
+					{topics.map((topic, index) => (
+						<ListItem
+							key={index}
+							icon
+							onPress={() => this.openVersesView(topic)}
+						>
 							<Body>
-								<Text>{truth.displayName}</Text>
+								<Text>{topic.displayName}</Text>
 							</Body>
 							<Right>
 								<Icon active name="ios-arrow-forward" />
@@ -63,4 +67,4 @@ class Truths extends React.Component {
 	}
 }
 
-export default withMenuButtons({ bibleIcon: true, menuIcon: true })(Truths)
+export default withMenuButtons({ bibleIcon: true, menuIcon: true })(Topics)

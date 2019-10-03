@@ -6,7 +6,7 @@
 
 ## To be improved:
 
-nill
+- Agregar un cooldown luego de hacer pushView, asi no se hace varias veces
 
 ## Upcoming features:
 

@@ -1,54 +1,58 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Content, View, ListItem, Text } from 'native-base';
-import { setStackRoot } from '../../utils/navigation';
-import { connect } from 'react-redux';
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { Container, Content, View, ListItem, Text } from 'native-base'
+import { setStackRoot } from '../../utils/navigation'
+import { connect } from 'react-redux'
 
 class SideDrawer extends React.Component {
 	changeView = id => {
 		switch (id) {
 			case 'home':
-				this.openView('jw-tools.Search', true, true);
-				break;
+				this.openView('jw-tools.Search', true, true)
+				break
 
 			case 'preaching':
-				this.openView('jw-tools.Preaching', true, true);
-				break;
+				this.openView('jw-tools.Preaching', true, true)
+				break
+
+			case 'topics':
+				this.openView('jw-tools.Topics', true, true)
+				break
 
 			case 'settings':
-				this.openView('jw-tools.Settings', true);
-				break;
+				this.openView('jw-tools.Settings', true)
+				break
 
 			case 'truths':
-				this.openView('jw-tools.Truths', true);
-				break;
+				this.openView('jw-tools.Truths', true)
+				break
 
 			case 'principles':
-				this.openView('jw-tools.Principles', true);
-				break;
+				this.openView('jw-tools.Principles', true)
+				break
 
 			case 'lessons':
-				this.openView('jw-tools.Lessons', true);
-				break;
+				this.openView('jw-tools.Lessons', true)
+				break
 
 			case 'bible':
-				this.openView('jw-tools.Bible', true);
-				break;
+				this.openView('jw-tools.Bible', true)
+				break
 
 			default:
-				break;
+				break
 		}
-	};
+	}
 
 	openView = (screenId, withMenuButton = false, withBibleButton = false) => {
-		const { openerId } = this.props;
+		const { openerId } = this.props
 		setStackRoot({
 			screenId,
 			withBibleButton,
 			withMenuButton,
 			stackId: openerId,
-		});
-	};
+		})
+	}
 
 	render() {
 		return (
@@ -73,6 +77,15 @@ class SideDrawer extends React.Component {
 						<ListItem onPress={() => this.changeView('preaching')}>
 							<Text>Para predicar</Text>
 						</ListItem>
+						<ListItem onPress={() => this.changeView('topics')}>
+							<Text>Temas</Text>
+						</ListItem>
+						<ListItem onPress={() => this.changeView('revisits')}>
+							<Text>Revisitas</Text>
+						</ListItem>
+						<ListItem onPress={() => this.changeView('videos')}>
+							<Text>Videos</Text>
+						</ListItem>
 						<ListItem>
 							<Text>Mis Archivos</Text>
 						</ListItem>
@@ -85,14 +98,14 @@ class SideDrawer extends React.Component {
 					</View>
 				</Content>
 			</Container>
-		);
+		)
 	}
 }
 
-const s = StyleSheet.create({});
+const s = StyleSheet.create({})
 
 const mapStateToProps = state => ({
 	openerId: state.navigation.openerId,
-});
+})
 
-export default connect(mapStateToProps)(SideDrawer);
+export default connect(mapStateToProps)(SideDrawer)

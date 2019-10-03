@@ -1,0 +1,155 @@
+export default [
+	{
+		displayName: 'Ateos y ciencia',
+		verses: [
+			'job-26-7',
+			'isai-40-22',
+			'hebr-3-4',
+			'amos-9-6',
+			'nume-19-16',
+			'jere-25-12',
+			'2tim-3-16',
+		],
+	},
+	{
+		displayName: 'Religión',
+		verses: ['1cor-6-1:3', 'reve-1-1'],
+	},
+	{
+		displayName: 'Un solo Dios',
+		verses: ['salm-83-18'],
+	},
+	{
+		displayName: 'Mundo de satanás',
+		verses: [
+			'1jua-5-19',
+			'2tim-3-1:5',
+			'jere-10-23',
+			'reve-12-12',
+			'jere-9-11',
+			'mate-6-9:10',
+			'dani-2-44',
+		],
+	},
+	{
+		displayName: 'Muerte',
+		verses: [
+			'ecle-9-5:6',
+			'ecle-9-10',
+			'salm-146-4',
+			'juan-11-11:14',
+			'roma-5-12',
+			'1cor-15-26',
+			'hech-24-15',
+			'juan-5-28:29',
+			'1tes-4-16',
+		],
+	},
+	{
+		displayName: 'Dios se preocupa por nosotros',
+		verses: [
+			'2cor-1-3:4',
+			'1ped-5-6:7',
+			'jere-9-11',
+			'isai-48-17:18',
+			'mate-24-14',
+			'mate-10-29:31',
+			'salm-139-1:4',
+			'fili-4-6:7',
+			'prov-17-22',
+		],
+	},
+	{
+		displayName: 'Paraíso',
+		verses: [
+			'gene-1-28',
+			'mate-5-5',
+			'gene-1-28',
+			'isai-55-11',
+			'salm-37-10:11',
+			'salm-37-29',
+			'2ped-3-13',
+			'reve-5-10',
+			'reve-11-18',
+			'reve-21-3:4',
+		],
+	},
+
+	{
+		displayName: 'Últimos días',
+		verses: [
+			'2tim-3-1:5',
+			'mate-24-14',
+			'mate-24-36',
+			'mate-24-3',
+			'reve-12-12',
+			'mate-24-7',
+			'luca-21-11',
+			'dani-12-4',
+			'1tes-5-2',
+			'reve-14-15',
+			'reve-16-13:16',
+		],
+	},
+	{
+		displayName: 'Nombre de Dios',
+		verses: ['salm-83-18'],
+	},
+	{
+		displayName: 'Reunirse',
+		verses: [],
+	},
+	{
+		displayName: 'Aborto',
+		verses: ['exod-21-22:23'],
+	},
+	{
+		displayName: 'Imágenes',
+		verses: [],
+	},
+	{
+		displayName: 'Sangre',
+		verses: ['gene-9-4', 'levi-17-10:11', 'hech-15-20', 'hech-15-28:29'],
+	},
+	{
+		displayName: 'Festividades',
+		verses: [],
+	},
+	{
+		displayName: 'Política',
+		verses: [
+			'jere-10-23',
+			'1jua-5-19',
+			'efes-6-12',
+			'juan-6-15',
+			'juan-17-16',
+			'juan-18-36',
+		],
+	},
+	{
+		displayName: 'Enfermedades',
+		verses: [
+			'isai-33-24',
+			'isai-35-5:6',
+			'salm-41-3',
+			'fili-4-6:7',
+			'prov-17-22',
+		],
+	},
+	{
+		displayName: 'Debemos hacer cambios',
+		verses: [
+			'sant-4-8',
+			'juan-3-16',
+			'juan-17-3',
+			'1tes-5-2',
+			'mate-24-37:39',
+			'juan-3-36',
+			'sant-2-24:26',
+		],
+	},
+	{
+		displayName: 'Infierno',
+		verses: ['roma-6-7', '1jua-4-8', 'reve-20-14'],
+	},
+]
