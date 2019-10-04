@@ -196,7 +196,7 @@ bible.search = function(phrase, books = null, MAX_RESULTS = 10) {
 const abbreviations = [
 	'gene',
 	'exod',
-	'leve',
+	'levi',
 	'nume',
 	'deut',
 	'josu',
