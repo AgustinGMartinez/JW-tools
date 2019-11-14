@@ -10,9 +10,9 @@ buildscript {
     }
     repositories {
         google()
-        jcenter()
         mavenLocal()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.1'
@@ -24,9 +24,9 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         mavenLocal()
         mavenCentral()
-        google()
         jcenter()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
@@ -51,4 +51,11 @@ subprojects { subproject ->
             }
         }
     }
+}
+
+ext {
+    minSdkVersion = 19
+    compileSdkVersion = 26
+    targetSdkVersion = 26
+    supportLibVersion = "26.1.0"
 }
