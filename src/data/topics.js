@@ -64,6 +64,7 @@ export default [
 	{
 		displayName: 'Muerte',
 		verses: [
+			'juan-11-24',
 			'ecle-9-5:6',
 			'ecle-9-10',
 			'salm-146-4',
@@ -86,21 +87,26 @@ export default [
 			'mate-10-29:31',
 			'salm-139-1:4',
 			'fili-4-6:7',
-			'prov-17-22'
+			'prov-17-22',
+			'isai-63-9'
 		]
 	},
 	{
-		displayName: 'Paraíso',
+		displayName: 'Paraíso y tierra',
 		verses: [
+			'2ped-3-13',
 			'gene-1-28',
-			'mate-5-5',
+			'gene-2-15',
 			'isai-55-11',
 			'salm-37-10:11',
+			'isai-65-21:23',
+			'isai-33-24',
+			'isai-11-6:9',
+			'mate-5-5',
 			'salm-37-29',
-			'2ped-3-13',
 			'reve-5-10',
 			'reve-11-18',
-			'reve-21-3:4'
+			'reve-21-4'
 		]
 	},
 
@@ -108,6 +114,7 @@ export default [
 		displayName: 'Últimos días',
 		verses: [
 			'2tim-3-1:5',
+			'2ped-3-3:4',
 			'mate-24-14',
 			'mate-24-36',
 			'mate-24-3',
@@ -122,7 +129,7 @@ export default [
 	},
 	{
 		displayName: 'Nombre de Dios',
-		verses: ['salm-83-18', 'jere-23-27']
+		verses: ['salm-83-18', 'jere-23-27', 'exod-3-13:15', 'exod-6-2:3']
 	},
 	{
 		displayName: 'Reunirse',
@@ -179,7 +186,7 @@ export default [
 	},
 	{
 		displayName: 'Infierno',
-		verses: ['juan-3-16', 'roma-6-7', '1jua-4-8', 'reve-20-14']
+		verses: ['juan-3-16', 'roma-6-7', '1jua-4-8', 'reve-20-14', 'juda-1-7']
 	},
 	{
 		displayName: 'Expulsión',
@@ -187,10 +194,14 @@ export default [
 	},
 	{
 		displayName: 'Salvación',
-		verses: ['mate-19-17', 'juan-3-16', 'juan-17-3']
+		verses: ['mate-7-21', 'mate-19-17', 'juan-3-16', 'juan-17-3']
 	},
 	{
 		displayName: 'Incesto',
 		verses: ['levi-18-9']
+	},
+	{
+		displayName: 'Estudiar/interpretar la biblia',
+		verses: ['2ped-1-20', 'roma-9-1:33', 'hech-8-29:31']
 	}
 ]
